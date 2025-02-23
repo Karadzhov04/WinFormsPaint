@@ -97,5 +97,14 @@ namespace Draw
 		{
 			dialogProcessor.IsDragging = false;
 		}
-	}
+
+        private void drawRectangleSpeedButtonClick(object sender, EventArgs e)
+        {
+            dialogProcessor.AddRandomStar();
+
+            statusBar.Items[0].Text = "Последно действие: Рисуване на звездата";
+
+            viewPort.Invalidate();
+        }
+    }
 }
