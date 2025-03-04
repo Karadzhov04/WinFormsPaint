@@ -73,17 +73,37 @@ namespace Draw
 			get { return fillColor; }
 			set { fillColor = value; }
 		}
-		
-		#endregion
-		
 
-		/// <summary>
-		/// Проверка дали точка point принадлежи на елемента.
-		/// </summary>
-		/// <param name="point">Точка</param>
-		/// <returns>Връща true, ако точката принадлежи на елемента и
-		/// false, ако не пренадлежи</returns>
-		public virtual bool Contains(PointF point)
+        private int stroke;
+        public virtual int Stroke
+        {
+            get { return stroke; }
+            set { stroke = value; }
+        }
+
+        private Color strokeColor;
+        public virtual Color StrokeColor
+        {
+            get { return strokeColor; }
+            set { strokeColor = value; }
+        }
+
+        private int transparency;
+        public virtual int Transparency
+        {
+            get { return transparency; }
+            set { transparency = value; }
+        }
+        #endregion
+
+
+        /// <summary>
+        /// Проверка дали точка point принадлежи на елемента.
+        /// </summary>
+        /// <param name="point">Точка</param>
+        /// <returns>Връща true, ако точката принадлежи на елемента и
+        /// false, ако не пренадлежи</returns>
+        public virtual bool Contains(PointF point)
 		{
 			return Rectangle.Contains(point.X, point.Y);
 		}

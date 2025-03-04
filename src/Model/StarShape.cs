@@ -19,15 +19,17 @@ namespace Draw.src.Model
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
+            Pen pen = new Pen(Color.Black, Stroke);
+            Color color = Color.FromArgb(255 - Transparency, FillColor);
 
             PointF[] starPoints = GetStarPoints(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-            grfx.FillPolygon(new SolidBrush(FillColor), starPoints);
-            grfx.DrawPolygon(Pens.Black, starPoints);
+            grfx.FillPolygon(new SolidBrush(color), starPoints);
+            grfx.DrawPolygon(pen, starPoints);
 
             PointF center = new PointF(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
             for (int i = 0; i < starPoints.Length; i++)
             {
-                grfx.DrawLine(Pens.Black, center, starPoints[i]);
+                grfx.DrawLine(pen, center, starPoints[i]);
             }
 
         }

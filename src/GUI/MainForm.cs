@@ -22,11 +22,10 @@ namespace Draw
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
-		}
+            //
+            // TODO: Add constructor code after the InitializeComponent() call.
+            //
+        }
 
 		/// <summary>
 		/// Изход от програмата. Затваря главната форма, а с това и програмата.
@@ -105,6 +104,43 @@ namespace Draw
             statusBar.Items[0].Text = "Последно действие: Рисуване на звездата";
 
             viewPort.Invalidate();
+        }
+
+        private void trackBarStroke_ValueChanged(object sender, EventArgs e)
+        {
+			if (dialogProcessor.Selection != null) 
+			{
+				dialogProcessor.Selection.Stroke = trackBarStroke.Value;
+				viewPort.Invalidate();
+			}
+
+        }
+
+        private void ColorPickerButtonClicked(object sender, EventArgs e)
+        {
+			if (colorDialog1.ShowDialog() == DialogResult.OK && dialogProcessor.Selection != null)
+			{ 
+				dialogProcessor.Selection.FillColor = colorDialog1.Color;
+				viewPort.Invalidate();
+			}
+        }
+
+        private void TransparencyButtonClicked(object sender, EventArgs e)
+        {
+            if (dialogProcessor.Selection != null)
+			{ 
+				dialogProcessor.Selection.Transparency = trackBarTransparency.Value;
+				viewPort.Invalidate();
+			}
+        }
+
+        private void StrokeColorPickerClicked(object sender, EventArgs e)
+        {
+			if (colorDialog1.ShowDialog() == DialogResult.OK && dialogProcessor.Selection != null)
+			{
+				dialogProcessor.Selection.StrokeColor = colorDialog1.Color;
+				viewPort.Invalidate();
+			}
         }
     }
 }

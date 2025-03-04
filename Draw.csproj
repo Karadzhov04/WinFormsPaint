@@ -125,4 +125,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="icon.png" />
+  </ItemGroup>
 </Project>

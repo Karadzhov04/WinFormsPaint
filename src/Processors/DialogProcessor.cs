@@ -86,7 +86,7 @@ namespace Draw
 		{
 			for(int i = ShapeList.Count - 1; i >= 0; i--){
 				if (ShapeList[i].Contains(point)){
-					ShapeList[i].FillColor = Color.Red;
+					//ShapeList[i].FillColor = Color.Red;
 						
 					return ShapeList[i];
 				}	
