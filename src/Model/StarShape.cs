@@ -19,7 +19,7 @@ namespace Draw.src.Model
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
-            Pen pen = new Pen(Color.Black, Stroke);
+            Pen pen = new Pen(StrokeColor, Stroke);
             Color color = Color.FromArgb(255 - Transparency, FillColor);
 
             PointF[] starPoints = GetStarPoints(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);

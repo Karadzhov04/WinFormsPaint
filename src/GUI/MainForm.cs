@@ -97,15 +97,6 @@ namespace Draw
 			dialogProcessor.IsDragging = false;
 		}
 
-        private void drawRectangleSpeedButtonClick(object sender, EventArgs e)
-        {
-            dialogProcessor.AddRandomStar();
-
-            statusBar.Items[0].Text = "Последно действие: Рисуване на звездата";
-
-            viewPort.Invalidate();
-        }
-
         private void trackBarStroke_ValueChanged(object sender, EventArgs e)
         {
 			if (dialogProcessor.Selection != null) 
@@ -141,6 +132,42 @@ namespace Draw
 				dialogProcessor.Selection.StrokeColor = colorDialog1.Color;
 				viewPort.Invalidate();
 			}
+        }
+
+        private void drawElipseSpeedButtonClick(object sender, EventArgs e)
+        {
+            dialogProcessor.AddRandomEllipse();
+
+            statusBar.Items[0].Text = "Последно действие: Рисуване на елипса";
+
+            viewPort.Invalidate();
+        }
+
+        private void drawStarSpeedButtonClick(object sender, EventArgs e)
+        {
+            dialogProcessor.AddRandomStar();
+
+            statusBar.Items[0].Text = "Последно действие: Рисуване на звездата";
+
+            viewPort.Invalidate();
+        }
+
+        private void GradientColor1PickerClicked(object sender, EventArgs e)
+        {
+            if (colorDialog3.ShowDialog() == DialogResult.OK && dialogProcessor.Selection != null)
+            {
+                dialogProcessor.Selection.Color1Gradient = colorDialog3.Color;
+                viewPort.Invalidate();
+            }
+        }
+
+        private void GradientColor2PickerClicked(object sender, EventArgs e)
+        {
+            if (colorDialog3.ShowDialog() == DialogResult.OK && dialogProcessor.Selection != null)
+            {
+                dialogProcessor.Selection.Color2Gradient = colorDialog3.Color;
+                viewPort.Invalidate();
+            }
         }
     }
 }

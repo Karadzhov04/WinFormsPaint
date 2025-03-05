@@ -75,6 +75,18 @@ namespace Draw
 
             ShapeList.Add(star);
         }
+
+        public void AddRandomEllipse()
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            EllipseShape ellipse = new EllipseShape(new Rectangle(x, y, 100, 200));
+            ellipse.FillColor = Color.White;
+
+            ShapeList.Add(ellipse);
+        }
         /// <summary>
         /// Проверява дали дадена точка е в елемента.
         /// Обхожда в ред обратен на визуализацията с цел намиране на

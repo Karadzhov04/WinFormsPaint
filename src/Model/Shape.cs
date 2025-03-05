@@ -81,7 +81,7 @@ namespace Draw
             set { stroke = value; }
         }
 
-        private Color strokeColor;
+        private Color strokeColor = Color.Black;
         public virtual Color StrokeColor
         {
             get { return strokeColor; }
@@ -94,6 +94,21 @@ namespace Draw
             get { return transparency; }
             set { transparency = value; }
         }
+
+        private Color color1Gradient = Color.White;
+        public virtual Color Color1Gradient
+        {
+            get { return color1Gradient; }
+            set { color1Gradient = value; }
+        }
+
+        private Color color2Gradient = Color.Black;
+        public virtual Color Color2Gradient
+        {
+            get { return color2Gradient; }
+            set { color2Gradient = value; }
+        }
+
         #endregion
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
@@ -43,12 +44,14 @@ namespace Draw
 		/// </summary>
 		public override void DrawSelf(Graphics grfx)
 		{
-			base.DrawSelf(grfx);
-			Color color = Color.FromArgb(255- Transparency, FillColor);
+            base.DrawSelf(grfx);
 
-            Pen pen = new Pen(StrokeColor, Stroke);
+            RectangleF rect = new RectangleF(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            Color color = Color.FromArgb(255- Transparency, FillColor);
+			Pen pen = new Pen(StrokeColor, Stroke);
+			LinearGradientBrush brush = new LinearGradientBrush(rect, Color1Gradient, Color2Gradient, LinearGradientMode.Horizontal);
 
-            grfx.FillRectangle(new SolidBrush(color),Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            grfx.FillRectangle(brush, rect);
 			grfx.DrawRectangle(pen, Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
 			
 		}
