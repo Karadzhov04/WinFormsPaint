@@ -43,6 +43,8 @@
             this.pickUpSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.drawStarSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.ColorPickerButton = new System.Windows.Forms.ToolStripButton();
+            this.drawElipseSpeedButton = new System.Windows.Forms.ToolStripButton();
+            this.drawLineSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.trackBarStroke = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,11 +52,11 @@
             this.trackBarTransparency = new System.Windows.Forms.TrackBar();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.button1 = new System.Windows.Forms.Button();
-            this.drawElipseSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.drawPointSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -72,7 +74,7 @@
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(924, 28);
+            this.mainMenu.Size = new System.Drawing.Size(924, 30);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -81,7 +83,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
@@ -94,13 +96,13 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(65, 26);
             this.imageToolStripMenuItem.Text = "Image";
             // 
             // helpToolStripMenuItem
@@ -108,7 +110,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -142,10 +144,12 @@
             this.pickUpSpeedButton,
             this.drawStarSpeedButton,
             this.ColorPickerButton,
-            this.drawElipseSpeedButton});
-            this.speedMenu.Location = new System.Drawing.Point(0, 28);
+            this.drawElipseSpeedButton,
+            this.drawLineSpeedButton,
+            this.drawPointSpeedButton});
+            this.speedMenu.Location = new System.Drawing.Point(0, 30);
             this.speedMenu.Name = "speedMenu";
-            this.speedMenu.Size = new System.Drawing.Size(924, 27);
+            this.speedMenu.Size = new System.Drawing.Size(924, 31);
             this.speedMenu.TabIndex = 3;
             this.speedMenu.Text = "toolStrip1";
             // 
@@ -155,7 +159,7 @@
             this.drawRectangleSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawRectangleSpeedButton.Image")));
             this.drawRectangleSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawRectangleSpeedButton.Name = "drawRectangleSpeedButton";
-            this.drawRectangleSpeedButton.Size = new System.Drawing.Size(29, 24);
+            this.drawRectangleSpeedButton.Size = new System.Drawing.Size(29, 28);
             this.drawRectangleSpeedButton.Text = "DrawRectangleButton";
             this.drawRectangleSpeedButton.Click += new System.EventHandler(this.DrawRectangleSpeedButtonClick);
             // 
@@ -166,7 +170,7 @@
             this.pickUpSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("pickUpSpeedButton.Image")));
             this.pickUpSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pickUpSpeedButton.Name = "pickUpSpeedButton";
-            this.pickUpSpeedButton.Size = new System.Drawing.Size(29, 24);
+            this.pickUpSpeedButton.Size = new System.Drawing.Size(29, 28);
             this.pickUpSpeedButton.Text = "toolStripButton1";
             // 
             // drawStarSpeedButton
@@ -175,7 +179,7 @@
             this.drawStarSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawStarSpeedButton.Image")));
             this.drawStarSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawStarSpeedButton.Name = "drawStarSpeedButton";
-            this.drawStarSpeedButton.Size = new System.Drawing.Size(29, 24);
+            this.drawStarSpeedButton.Size = new System.Drawing.Size(29, 28);
             this.drawStarSpeedButton.Text = "toolStripButton1";
             this.drawStarSpeedButton.Click += new System.EventHandler(this.drawStarSpeedButtonClick);
             // 
@@ -185,9 +189,29 @@
             this.ColorPickerButton.Image = ((System.Drawing.Image)(resources.GetObject("ColorPickerButton.Image")));
             this.ColorPickerButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ColorPickerButton.Name = "ColorPickerButton";
-            this.ColorPickerButton.Size = new System.Drawing.Size(29, 24);
+            this.ColorPickerButton.Size = new System.Drawing.Size(29, 28);
             this.ColorPickerButton.Text = "toolStripButton1";
             this.ColorPickerButton.Click += new System.EventHandler(this.ColorPickerButtonClicked);
+            // 
+            // drawElipseSpeedButton
+            // 
+            this.drawElipseSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.drawElipseSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawElipseSpeedButton.Image")));
+            this.drawElipseSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.drawElipseSpeedButton.Name = "drawElipseSpeedButton";
+            this.drawElipseSpeedButton.Size = new System.Drawing.Size(29, 28);
+            this.drawElipseSpeedButton.Text = "toolStripButton1";
+            this.drawElipseSpeedButton.Click += new System.EventHandler(this.drawElipseSpeedButtonClick);
+            // 
+            // drawLineSpeedButton
+            // 
+            this.drawLineSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.drawLineSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawLineSpeedButton.Image")));
+            this.drawLineSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.drawLineSpeedButton.Name = "drawLineSpeedButton";
+            this.drawLineSpeedButton.Size = new System.Drawing.Size(29, 28);
+            this.drawLineSpeedButton.Text = "toolStripButton1";
+            this.drawLineSpeedButton.Click += new System.EventHandler(this.drawLineSpeedButtonClick);
             // 
             // trackBarStroke
             // 
@@ -235,16 +259,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.StrokeColorPickerClicked);
             // 
-            // drawElipseSpeedButton
-            // 
-            this.drawElipseSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.drawElipseSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawElipseSpeedButton.Image")));
-            this.drawElipseSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.drawElipseSpeedButton.Name = "drawElipseSpeedButton";
-            this.drawElipseSpeedButton.Size = new System.Drawing.Size(29, 24);
-            this.drawElipseSpeedButton.Text = "toolStripButton1";
-            this.drawElipseSpeedButton.Click += new System.EventHandler(this.drawElipseSpeedButtonClick);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(613, 12);
@@ -268,15 +282,25 @@
             // viewPort
             // 
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPort.Location = new System.Drawing.Point(0, 55);
+            this.viewPort.Location = new System.Drawing.Point(0, 61);
             this.viewPort.Margin = new System.Windows.Forms.Padding(5);
             this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(924, 444);
+            this.viewPort.Size = new System.Drawing.Size(924, 438);
             this.viewPort.TabIndex = 4;
             this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
+            // 
+            // drawPointSpeedButton
+            // 
+            this.drawPointSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.drawPointSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawPointSpeedButton.Image")));
+            this.drawPointSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.drawPointSpeedButton.Name = "drawPointSpeedButton";
+            this.drawPointSpeedButton.Size = new System.Drawing.Size(29, 28);
+            this.drawPointSpeedButton.Text = "toolStripButton1";
+            this.drawPointSpeedButton.Click += new System.EventHandler(this.drawPointSpeedButtonClick);
             // 
             // MainForm
             // 
@@ -339,5 +363,7 @@
         private System.Windows.Forms.ColorDialog colorDialog3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripButton drawLineSpeedButton;
+        private System.Windows.Forms.ToolStripButton drawPointSpeedButton;
     }
 }

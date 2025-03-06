@@ -87,6 +87,30 @@ namespace Draw
 
             ShapeList.Add(ellipse);
         }
+
+
+        public void AddRandomLine()
+        {
+            Random rnd = new Random();
+            float x = rnd.Next(100, 1000);
+            float y = rnd.Next(100, 600);
+            float x2 = rnd.Next(100, 1000);
+            float y2 = rnd.Next(100, 600);
+
+            LineShape line = new LineShape(new RectangleF(x, y, x2 - x, y2 - y));
+            ShapeList.Add(line);
+        }
+
+        public void AddRandomPoint()
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            float size = 5; // Размер на точката
+            PointShape point = new PointShape(new RectangleF(x - size / 2, y - size / 2, size, size));
+            ShapeList.Add(point);
+        }
         /// <summary>
         /// Проверява дали дадена точка е в елемента.
         /// Обхожда в ред обратен на визуализацията с цел намиране на
