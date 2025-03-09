@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Draw.src.Model;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -22,15 +23,23 @@ namespace Draw
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
+            this.MouseClick += Form1_MouseClick;
+            foreach (Control c in this.Controls)
+            {
+                c.MouseClick += Form1_MouseClick;
+            }
+
+
+
             //
             // TODO: Add constructor code after the InitializeComponent() call.
             //
         }
 
-		/// <summary>
-		/// Изход от програмата. Затваря главната форма, а с това и програмата.
-		/// </summary>
-		void ExitToolStripMenuItemClick(object sender, EventArgs e)
+        /// <summary>
+        /// Изход от програмата. Затваря главната форма, а с това и програмата.
+        /// </summary>
+        void ExitToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			Close();
 		}
@@ -42,12 +51,12 @@ namespace Draw
 		{
 			dialogProcessor.ReDraw(sender, e);
 		}
-		
-		/// <summary>
-		/// Бутон, който поставя на произволно място правоъгълник със зададените размери.
-		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
-		/// </summary>
-		void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
+
+        /// <summary>
+        /// Бутон, който поставя на произволно място правоъгълник със зададените размери.
+        /// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+        /// </summary>
+        void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
 		{
 			dialogProcessor.AddRandomRectangle();
 			
@@ -186,6 +195,47 @@ namespace Draw
             statusBar.Items[0].Text = "Последно действие: Рисуване на точка";
 
             viewPort.Invalidate();
+        }
+
+        private bool isWaitingForClick = false;
+
+        private void CheckPointInPolygonClick(object sender, EventArgs e)
+        {
+            isWaitingForClick = true;
+            MessageBox.Show("Цъкнете някъде в прозореца, за да проверите дали точката е във фигура.");
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (isWaitingForClick)
+            {
+                isWaitingForClick = false; // Спираме режима на изчакване
+
+                PointF mousePoint = e.Location; // Взимаме координатите на кликнатата точка
+
+                //if (dialogProcessor.Selection == null)
+                //{
+                //    MessageBox.Show("Selection е null преди проверката!");
+                //}
+                //else
+                //{
+                //    MessageBox.Show($"Selection НЕ Е null: {dialogProcessor.Selection.ToString()}");
+                //}
+                // Проверяваме дали точката попада в някоя фигура
+                if (dialogProcessor.Selection == null)
+                {
+                    MessageBox.Show("Няма избрана фигура!");
+                }
+                else if (dialogProcessor.Selection.Contains(mousePoint))
+                {
+                    MessageBox.Show("Точката е във фигура!");
+                }
+                else
+                {
+                    MessageBox.Show("Точката не е в нито една фигура.");
+                }
+
+            }
         }
     }
 }

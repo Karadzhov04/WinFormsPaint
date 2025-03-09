@@ -122,12 +122,12 @@ namespace Draw
 		{
 			return Rectangle.Contains(point.X, point.Y);
 		}
-		
-		/// <summary>
-		/// Визуализира елемента.
-		/// </summary>
-		/// <param name="grfx">Къде да бъде визуализиран елемента.</param>
-		public virtual void DrawSelf(Graphics grfx)
+
+        /// <summary>
+        /// Визуализира елемента.
+        /// </summary>
+        /// <param name="grfx">Къде да бъде визуализиран елемента.</param>
+        public virtual void DrawSelf(Graphics grfx)
 		{
 			// shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
 		}

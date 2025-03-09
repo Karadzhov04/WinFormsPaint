@@ -45,6 +45,8 @@
             this.ColorPickerButton = new System.Windows.Forms.ToolStripButton();
             this.drawElipseSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.drawLineSpeedButton = new System.Windows.Forms.ToolStripButton();
+            this.drawPointSpeedButton = new System.Windows.Forms.ToolStripButton();
+            this.CheckPointInPolygonButton = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.trackBarStroke = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,7 +58,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.viewPort = new Draw.DoubleBufferedPanel();
-            this.drawPointSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -146,7 +147,8 @@
             this.ColorPickerButton,
             this.drawElipseSpeedButton,
             this.drawLineSpeedButton,
-            this.drawPointSpeedButton});
+            this.drawPointSpeedButton,
+            this.CheckPointInPolygonButton});
             this.speedMenu.Location = new System.Drawing.Point(0, 30);
             this.speedMenu.Name = "speedMenu";
             this.speedMenu.Size = new System.Drawing.Size(924, 31);
@@ -212,6 +214,26 @@
             this.drawLineSpeedButton.Size = new System.Drawing.Size(29, 28);
             this.drawLineSpeedButton.Text = "toolStripButton1";
             this.drawLineSpeedButton.Click += new System.EventHandler(this.drawLineSpeedButtonClick);
+            // 
+            // drawPointSpeedButton
+            // 
+            this.drawPointSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.drawPointSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawPointSpeedButton.Image")));
+            this.drawPointSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.drawPointSpeedButton.Name = "drawPointSpeedButton";
+            this.drawPointSpeedButton.Size = new System.Drawing.Size(29, 28);
+            this.drawPointSpeedButton.Text = "toolStripButton1";
+            this.drawPointSpeedButton.Click += new System.EventHandler(this.drawPointSpeedButtonClick);
+            // 
+            // CheckPointInPolygonButton
+            // 
+            this.CheckPointInPolygonButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CheckPointInPolygonButton.Image = ((System.Drawing.Image)(resources.GetObject("CheckPointInPolygonButton.Image")));
+            this.CheckPointInPolygonButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CheckPointInPolygonButton.Name = "CheckPointInPolygonButton";
+            this.CheckPointInPolygonButton.Size = new System.Drawing.Size(29, 28);
+            this.CheckPointInPolygonButton.Text = "CheckPoint";
+            this.CheckPointInPolygonButton.Click += new System.EventHandler(this.CheckPointInPolygonClick);
             // 
             // trackBarStroke
             // 
@@ -292,16 +314,6 @@
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
-            // drawPointSpeedButton
-            // 
-            this.drawPointSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.drawPointSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawPointSpeedButton.Image")));
-            this.drawPointSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.drawPointSpeedButton.Name = "drawPointSpeedButton";
-            this.drawPointSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.drawPointSpeedButton.Text = "toolStripButton1";
-            this.drawPointSpeedButton.Click += new System.EventHandler(this.drawPointSpeedButtonClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -365,5 +377,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolStripButton drawLineSpeedButton;
         private System.Windows.Forms.ToolStripButton drawPointSpeedButton;
+        private System.Windows.Forms.ToolStripButton CheckPointInPolygonButton;
     }
 }

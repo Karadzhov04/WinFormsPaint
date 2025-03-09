@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Draw.src.Model
 {
@@ -16,6 +17,32 @@ namespace Draw.src.Model
         }
 
         #endregion
+
+        public override bool Contains(PointF point)
+        {
+            PointF[] starPoints = GetStarPoints(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            int intersections = 0;
+            int numPoints = starPoints.Length;
+
+            for (int i = 0; i < numPoints; i++)
+            {
+                PointF p1 = starPoints[i];
+                PointF p2 = starPoints[(i + 1) % numPoints];
+
+                // Проверяваме дали лъчът пресича ръба на звездата
+                if ((p1.Y > point.Y) != (p2.Y > point.Y))
+                {
+                    float intersectX = p1.X + (point.Y - p1.Y) * (p2.X - p1.X) / (p2.Y - p1.Y);
+                    if (intersectX > point.X)
+                    {
+                        intersections++;
+                    }
+                }
+            }
+
+            return (intersections % 2) == 1; // Ако броят на пресичанията е нечетен, точката е вътре
+        }
+
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
