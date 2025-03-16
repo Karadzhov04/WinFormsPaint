@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
@@ -17,7 +18,9 @@ namespace Draw
 		public Shape(RectangleF rect)
 		{
 			rectangle = rect;
-		}
+            OriginalWidth = rect.Width;
+            OriginalHeight = rect.Height;
+        }
 		
 		public Shape(Shape shape)
 		{
@@ -27,7 +30,7 @@ namespace Draw
 			this.rectangle = shape.rectangle;
 			
 			this.FillColor =  shape.FillColor;
-		}
+        }
 		#endregion
 		
 		#region Properties
@@ -109,6 +112,28 @@ namespace Draw
             set { color2Gradient = value; }
         }
 
+        private Matrix rotation = new Matrix();
+        public virtual Matrix Rotation
+        {
+            get { return rotation; }
+            set { rotation = value; }
+        }
+
+        private float rotateDegree;
+        public virtual float RotateDegree
+        {
+            get { return rotateDegree; }
+            set { rotateDegree = value; }
+        }
+        public float OriginalWidth { get; set; }
+        public float OriginalHeight { get; set; }
+
+        private float scale = 0;
+        public virtual float Scale
+        {
+            get { return scale; }
+            set { scale = value; }
+        }
         #endregion
 
 
@@ -131,6 +156,10 @@ namespace Draw
 		{
 			// shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
 		}
-		
-	}
+
+        public virtual void ChangeSize(float scale)
+        {
+            
+        }
+    }
 }

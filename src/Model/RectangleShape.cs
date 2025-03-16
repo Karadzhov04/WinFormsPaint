@@ -46,14 +46,29 @@ namespace Draw
 		{
             base.DrawSelf(grfx);
 
+			ChangeSize(Scale);
             RectangleF rect = new RectangleF(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
             Color color = Color.FromArgb(255- Transparency, FillColor);
 			Pen pen = new Pen(StrokeColor, Stroke);
 			LinearGradientBrush brush = new LinearGradientBrush(rect, Color1Gradient, Color2Gradient, LinearGradientMode.Horizontal);
 
+            Matrix oldTransform = grfx.Transform;
+
+            // Прилагаме ротация само на тази фигура
+            grfx.Transform = Rotation;
+
             grfx.FillRectangle(brush, rect);
-			grfx.DrawRectangle(pen, Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            grfx.DrawRectangle(pen, Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+
+            // Връщаме оригиналната трансформация, за да не влияе на другите фигури
+            grfx.Transform = oldTransform;
+			
 			
 		}
-	}
+        public override void ChangeSize(float scale)
+        {
+            Width = OriginalWidth + scale;
+            Height = OriginalHeight + scale;
+        }
+    }
 }

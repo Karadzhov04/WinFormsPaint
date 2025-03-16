@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,10 +47,18 @@ namespace Draw.src.Model
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
+
+            ChangeSize(Scale);
+
             Pen pen = new Pen(StrokeColor, Stroke);
             Color color = Color.FromArgb(255 - Transparency, FillColor);
 
             PointF[] starPoints = GetStarPoints(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+
+            Matrix oldTransform = grfx.Transform;
+            // Прилагаме ротация само на тази фигура
+            grfx.Transform = Rotation;
+
             grfx.FillPolygon(new SolidBrush(color), starPoints);
             grfx.DrawPolygon(pen, starPoints);
 
@@ -59,6 +68,8 @@ namespace Draw.src.Model
                 grfx.DrawLine(pen, center, starPoints[i]);
             }
 
+            // Връщаме оригиналната трансформация, за да не влияе на другите фигури
+            grfx.Transform = oldTransform;
         }
         private PointF[] GetStarPoints(float x, float y, float width, float height)
         {
@@ -87,6 +98,12 @@ namespace Draw.src.Model
             }
 
             return points.ToArray();
+        }
+
+        public override void ChangeSize(float scale)
+        {
+            Width = OriginalWidth + scale;
+            Height = OriginalHeight + scale;
         }
     }
 }

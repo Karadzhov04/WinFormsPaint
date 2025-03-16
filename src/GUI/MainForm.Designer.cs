@@ -47,6 +47,7 @@
             this.drawLineSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.drawPointSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.CheckPointInPolygonButton = new System.Windows.Forms.ToolStripButton();
+            this.rotatePrimitiveSpeedButton = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.trackBarStroke = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,12 +58,14 @@
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.numericUpDownScale = new System.Windows.Forms.NumericUpDown();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStroke)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTransparency)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownScale)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -148,7 +151,8 @@
             this.drawElipseSpeedButton,
             this.drawLineSpeedButton,
             this.drawPointSpeedButton,
-            this.CheckPointInPolygonButton});
+            this.CheckPointInPolygonButton,
+            this.rotatePrimitiveSpeedButton});
             this.speedMenu.Location = new System.Drawing.Point(0, 30);
             this.speedMenu.Name = "speedMenu";
             this.speedMenu.Size = new System.Drawing.Size(924, 31);
@@ -235,6 +239,16 @@
             this.CheckPointInPolygonButton.Text = "CheckPoint";
             this.CheckPointInPolygonButton.Click += new System.EventHandler(this.CheckPointInPolygonClick);
             // 
+            // rotatePrimitiveSpeedButton
+            // 
+            this.rotatePrimitiveSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rotatePrimitiveSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("rotatePrimitiveSpeedButton.Image")));
+            this.rotatePrimitiveSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rotatePrimitiveSpeedButton.Name = "rotatePrimitiveSpeedButton";
+            this.rotatePrimitiveSpeedButton.Size = new System.Drawing.Size(29, 28);
+            this.rotatePrimitiveSpeedButton.Text = "toolStripButton1";
+            this.rotatePrimitiveSpeedButton.Click += new System.EventHandler(this.rotatePrimitiveSpeedButton_Click);
+            // 
             // trackBarStroke
             // 
             this.trackBarStroke.Location = new System.Drawing.Point(336, 25);
@@ -301,6 +315,19 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.GradientColor2PickerClicked);
             // 
+            // numericUpDownScale
+            // 
+            this.numericUpDownScale.Location = new System.Drawing.Point(749, 20);
+            this.numericUpDownScale.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownScale.Name = "numericUpDownScale";
+            this.numericUpDownScale.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDownScale.TabIndex = 13;
+            this.numericUpDownScale.ValueChanged += new System.EventHandler(this.numericUpDownScaleChange);
+            // 
             // viewPort
             // 
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -319,6 +346,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 521);
+            this.Controls.Add(this.numericUpDownScale);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -344,6 +372,7 @@
             this.speedMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStroke)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTransparency)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownScale)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,5 +407,7 @@
         private System.Windows.Forms.ToolStripButton drawLineSpeedButton;
         private System.Windows.Forms.ToolStripButton drawPointSpeedButton;
         private System.Windows.Forms.ToolStripButton CheckPointInPolygonButton;
+        private System.Windows.Forms.ToolStripButton rotatePrimitiveSpeedButton;
+        private System.Windows.Forms.NumericUpDown numericUpDownScale;
     }
 }

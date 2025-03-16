@@ -1,6 +1,8 @@
 ﻿using Draw.src.Model;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
@@ -22,8 +24,8 @@ namespace Draw
 		/// <summary>
 		/// Избран елемент.
 		/// </summary>
-		private Shape selection;
-		public Shape Selection {
+		private List<Shape> selection = new List<Shape>();
+		public List<Shape> Selection {
 			get { return selection; }
 			set { selection = value; }
 		}
@@ -119,27 +121,77 @@ namespace Draw
         /// <param name="point">Указана точка</param>
         /// <returns>Елемента на изображението, на който принадлежи дадената точка.</returns>
         public Shape ContainsPoint(PointF point)
-		{
-			for(int i = ShapeList.Count - 1; i >= 0; i--){
-				if (ShapeList[i].Contains(point)){
-					//ShapeList[i].FillColor = Color.Red;
-						
-					return ShapeList[i];
-				}	
-			}
-			return null;
-		}
-		
-		/// <summary>
-		/// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
-		/// </summary>
-		/// <param name="p">Вектор на транслация.</param>
-		public void TranslateTo(PointF p)
-		{
-			if (selection != null) {
-				selection.Location = new PointF(selection.Location.X + p.X - lastLocation.X, selection.Location.Y + p.Y - lastLocation.Y);
-				lastLocation = p;
-			}
-		}
-	}
+        {
+            for (int i = ShapeList.Count - 1; i >= 0; i--)
+            {
+                if (ShapeList[i].Contains(point))
+                {
+                    //ShapeList[i].FillColor = Color.Red;
+
+                    return ShapeList[i];
+                }
+            }
+            return null;
+        }
+        //public List<Shape> ContainsPoint(PointF point)
+        //{
+        //    List<Shape> selectedShapes = new List<Shape>();
+
+        //    for (int i = ShapeList.Count - 1; i >= 0; i--) // Започваме отгоре надолу
+        //    {
+        //        if (ShapeList[i].Contains(point))
+        //        {
+        //            selectedShapes.Add(ShapeList[i]); // Добавяме всички фигури, които съдържат точката
+        //        }
+        //    }
+
+        //    return selectedShapes; // Връщаме списък с всички попаднали фигури
+        //}
+
+        /// <summary>
+        /// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
+        /// </summary>
+        /// <param name="p">Вектор на транслация.</param>
+        //      public void TranslateTo(PointF p)
+        //{
+        //	if (selection.Count > 0) {
+        //		foreach (Shape shape in selection)
+        //		{
+        //                  shape.Location = new PointF(shape.Location.X + p.X - lastLocation.X, shape.Location.Y + p.Y - lastLocation.Y);	
+        //		}
+
+        //              lastLocation = p;
+        //          }
+        public void TranslateTo(PointF newLocation)
+        {
+            if (Selection.Count == 0) return;
+
+            // Изчисляваме разликата спрямо последната позиция
+            float dx = newLocation.X - LastLocation.X;
+            float dy = newLocation.Y - LastLocation.Y;
+
+            foreach (var shape in Selection)
+            {
+                // Взимаме центъра на текущата фигура
+                PointF center = new PointF(
+                    shape.Location.X + shape.Width / 2,
+                    shape.Location.Y + shape.Height / 2
+                );
+
+                // Създаваме обратната трансформация за всяка фигура
+                Matrix inverseRotation = shape.Rotation.Clone();
+                inverseRotation.Invert();
+
+                // Преобразуваме вектора на изместване спрямо ротацията
+                PointF[] delta = new PointF[] { new PointF(dx, dy) };
+                inverseRotation.TransformVectors(delta);
+
+                // Актуализираме позицията на фигурата
+                shape.Location = new PointF(shape.Location.X + delta[0].X, shape.Location.Y + delta[0].Y);
+            }
+
+            // Обновяваме последната позиция
+            LastLocation = newLocation;
+        }
+    }
 }

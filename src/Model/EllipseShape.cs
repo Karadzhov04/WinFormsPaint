@@ -20,9 +20,27 @@ namespace Draw.src.Model
 
         #endregion
 
+        public override bool Contains(PointF point)
+        {
+            //TODO
+            float a = Width / 2;
+            float b = Height / 2;
+
+            float xc = Location.X + a;
+            float yc = Location.Y + b;
+
+            PointF[] pointsToConvert = new PointF[] { point };
+            Rotation.Invert();
+            Rotation.TransformPoints(pointsToConvert);
+            Rotation.Invert();
+            PointF localPoint = pointsToConvert[0];
+
+            return Math.Pow((localPoint.X - xc) / a, 2) + Math.Pow((localPoint.Y - yc) / b, 2) - 1 <= 0;
+        }
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
+            ChangeSize(Scale);
 
             Pen pen = new Pen(StrokeColor, Stroke);
             Color color = Color.FromArgb(255 - Transparency, FillColor);
@@ -41,9 +59,22 @@ namespace Draw.src.Model
             brush.CenterColor = Color.Yellow;  // Централен цвят
             brush.SurroundColors = new Color[] { Color.Red }; // Цветове по краищата
 
+            Matrix oldTransform = grfx.Transform;
+
+            // Прилагаме ротация само на тази фигура
+            grfx.Transform = Rotation;
+
             grfx.FillEllipse(brush, ellipse);
             grfx.DrawEllipse(pen, ellipse);
 
+            // Връщаме оригиналната трансформация, за да не влияе на другите фигури
+            grfx.Transform = oldTransform;
+
+        }
+        public override void ChangeSize(float scale)
+        {
+            Width = OriginalWidth + scale;
+            Height = OriginalHeight + scale;
         }
     }
 }
