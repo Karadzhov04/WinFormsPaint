@@ -47,17 +47,15 @@ namespace Draw.src.Model
             RectangleF ellipse = new RectangleF(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
 
             //Rectangle rect = new Rectangle(50, 50, 100, 100);
-            GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(ellipse);
-            //path.AddLine(0, 0, 200, 200);
-            //path.AddRectangle(rect);
-
-            // 2. Създаване на PathGradientBrush на базата на този път
-            PathGradientBrush brush = new PathGradientBrush(path);
-
-            // 3. Определяне на цветовете на градиента
-            brush.CenterColor = Color.Yellow;  // Централен цвят
-            brush.SurroundColors = new Color[] { Color.Red }; // Цветове по краищата
+            Brush brush;
+            if (Color1Gradient != Color.Empty && Color2Gradient != Color.Empty)
+            {
+                brush = new LinearGradientBrush(ellipse, Color1Gradient, Color2Gradient, LinearGradientMode.Horizontal);
+            }
+            else
+            {
+                brush = new SolidBrush(color);
+            }
 
             Matrix oldTransform = grfx.Transform;
 

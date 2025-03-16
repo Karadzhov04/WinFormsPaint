@@ -49,8 +49,19 @@ namespace Draw
 			ChangeSize(Scale);
             RectangleF rect = new RectangleF(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
             Color color = Color.FromArgb(255- Transparency, FillColor);
+
 			Pen pen = new Pen(StrokeColor, Stroke);
-			LinearGradientBrush brush = new LinearGradientBrush(rect, Color1Gradient, Color2Gradient, LinearGradientMode.Horizontal);
+
+            Brush brush;
+            if (Color1Gradient != Color.Empty && Color2Gradient != Color.Empty)
+            {
+                brush = new LinearGradientBrush(rect, Color1Gradient, Color2Gradient, LinearGradientMode.Horizontal);
+            }
+            else
+            {
+                brush = new SolidBrush(color);
+            }
+
 
             Matrix oldTransform = grfx.Transform;
 

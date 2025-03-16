@@ -98,14 +98,14 @@ namespace Draw
             set { transparency = value; }
         }
 
-        private Color color1Gradient = Color.White;
+        private Color color1Gradient = Color.Empty;
         public virtual Color Color1Gradient
         {
             get { return color1Gradient; }
             set { color1Gradient = value; }
         }
 
-        private Color color2Gradient = Color.Black;
+        private Color color2Gradient = Color.Empty;
         public virtual Color Color2Gradient
         {
             get { return color2Gradient; }

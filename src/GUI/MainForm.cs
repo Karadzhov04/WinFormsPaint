@@ -343,5 +343,18 @@ namespace Draw
 
             viewPort.Invalidate();
         }
+
+        private void RemoveGradientsButton_Click(object sender, EventArgs e)
+        {
+            if (dialogProcessor.Selection.Count > 0)
+            {
+                foreach (Shape shape in dialogProcessor.Selection)
+                {
+                    shape.Color1Gradient = Color.Empty;
+                    shape.Color2Gradient = Color.Empty;
+                }
+                viewPort.Invalidate();
+            }
+        }
     }
 }

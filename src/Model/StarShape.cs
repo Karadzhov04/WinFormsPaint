@@ -50,16 +50,29 @@ namespace Draw.src.Model
 
             ChangeSize(Scale);
 
+            PointF[] starPoints = GetStarPoints(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+
             Pen pen = new Pen(StrokeColor, Stroke);
             Color color = Color.FromArgb(255 - Transparency, FillColor);
+            Brush brush;
 
-            PointF[] starPoints = GetStarPoints(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            if (Color1Gradient != Color.Empty && Color2Gradient != Color.Empty)
+            {
+                PathGradientBrush gradientBrush = new PathGradientBrush(starPoints);
+                gradientBrush.CenterColor = Color1Gradient; // Централен цвят
+                gradientBrush.SurroundColors = new Color[] { Color2Gradient }; // Външен цвят
+                brush = gradientBrush;
+            }
+            else
+            {
+                brush = new SolidBrush(color);
+            }
 
             Matrix oldTransform = grfx.Transform;
             // Прилагаме ротация само на тази фигура
             grfx.Transform = Rotation;
 
-            grfx.FillPolygon(new SolidBrush(color), starPoints);
+            grfx.FillPolygon(brush, starPoints);
             grfx.DrawPolygon(pen, starPoints);
 
             PointF center = new PointF(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
