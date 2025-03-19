@@ -341,6 +341,7 @@ namespace Draw
                 }            
             }
 
+
             viewPort.Invalidate();
         }
 
@@ -355,6 +356,12 @@ namespace Draw
                 }
                 viewPort.Invalidate();
             }
+        }
+
+        private void GroupingButton_Click(object sender, EventArgs e)
+        {
+            dialogProcessor.GroupSelectedShapes();
+            viewPort.Invalidate();
         }
     }
 }

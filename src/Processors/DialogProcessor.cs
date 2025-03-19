@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 
 namespace Draw
 {
@@ -172,7 +173,7 @@ namespace Draw
 
             foreach (var shape in Selection)
             {
-                // Взимаме центъра на текущата фигура
+                    // Взимаме центъра на текущата фигура
                 PointF center = new PointF(
                     shape.Location.X + shape.Width / 2,
                     shape.Location.Y + shape.Height / 2
@@ -188,10 +189,81 @@ namespace Draw
 
                 // Актуализираме позицията на фигурата
                 shape.Location = new PointF(shape.Location.X + delta[0].X, shape.Location.Y + delta[0].Y);
+
             }
 
             // Обновяваме последната позиция
             LastLocation = newLocation;
+        }
+        public void GroupSelectedShapes()
+        {
+            if (Selection.Count > 1)
+            {
+                float minX = float.PositiveInfinity;
+                float minY = float.PositiveInfinity;
+                float maxX = float.NegativeInfinity;
+                float maxY = float.NegativeInfinity;
+
+                foreach (Shape shape in Selection)
+                { 
+                    if(shape.Location.X < minX) minX = shape.Location.X;    
+                    if(shape.Location.Y < minY) minY = shape.Location.Y;
+                    
+                    if( shape.Location.X + shape.Width > maxX) maxX = shape.Location.X + shape.Width;
+
+                    if( shape.Location.Y + shape.Height > maxY) maxY = shape.Location.Y + shape.Height;
+                }
+
+                RectangleF groupBounds = new RectangleF(minX, minY, maxX - minX, maxY - minY);
+
+                GroupShape group = new GroupShape(groupBounds);
+
+                // Добавяме фигурите към групата
+                foreach (var shape in Selection)
+                {
+                    group.SubShapes.Add(shape);
+                }
+
+                // Обновяваме селекцията и ShapeList
+                Selection.Clear();
+                Selection.Add(group);
+                ShapeList.Add(group);
+                ShapeList.RemoveAll(shape => group.SubShapes.Contains(shape));
+            }
+        }
+
+        public override void Draw(Graphics grfx)
+        {
+            base.Draw(grfx);
+
+            if (Selection.Count > 0)
+            {
+                if (Selection.Count == 1 && Selection[0] is GroupShape group)
+                {
+                    float minX = float.PositiveInfinity;
+                    float minY = float.PositiveInfinity;
+                    float maxX = float.NegativeInfinity;
+                    float maxY = float.NegativeInfinity;
+
+                    foreach (Shape shape in Selection)
+                    {
+                        if (shape.Location.X < minX) minX = shape.Location.X;
+                        if (shape.Location.Y < minY) minY = shape.Location.Y;
+                        if (shape.Location.X + shape.Width > maxX)
+                            maxX = shape.Location.X + shape.Width;
+                        if (shape.Location.Y + shape.Height > maxY)
+                            maxY = shape.Location.Y + shape.Height;
+                    }
+
+                    grfx.DrawRectangle(
+                        Pens.Red,
+                        minX - 5,
+                        minY - 5,
+                        (maxX - minX) + 10,
+                        (maxY - minY) + 10
+                    );
+                }
+            }
         }
     }
 }
