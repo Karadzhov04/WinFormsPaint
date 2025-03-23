@@ -360,7 +360,16 @@ namespace Draw
 
         private void GroupingButton_Click(object sender, EventArgs e)
         {
-            dialogProcessor.GroupSelectedShapes();
+            if (dialogProcessor.Selection.Count == 1 && dialogProcessor.Selection[0] is GroupShape)
+            {
+                // Ако избраната фигура е група, я разгрупираме
+                dialogProcessor.UngroupSelectedShape();
+            }
+            else
+            {
+                dialogProcessor.GroupSelectedShapes();
+            }
+
             viewPort.Invalidate();
         }
     }

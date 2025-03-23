@@ -232,6 +232,20 @@ namespace Draw
             }
         }
 
+        public void UngroupSelectedShape()
+        {
+            if (Selection.Count == 1 && Selection[0] is GroupShape group)
+            {
+                ShapeList.AddRange(group.SubShapes);
+
+                // Премахваме групата от ShapeList
+                ShapeList.Remove(group);
+
+                // Обновяваме селекцията
+                Selection.Clear();
+                Selection.AddRange(group.SubShapes);
+            }
+        }
         public override void Draw(Graphics grfx)
         {
             base.Draw(grfx);
