@@ -95,13 +95,19 @@ namespace Draw
         public void AddRandomLine()
         {
             Random rnd = new Random();
-            float x = rnd.Next(100, 1000);
-            float y = rnd.Next(100, 600);
-            float x2 = rnd.Next(100, 1000);
-            float y2 = rnd.Next(100, 600);
+			float x = rnd.Next(100, 1000);
+			float y = rnd.Next(100, 600);
+			float x2 = rnd.Next(100, 1000);
+			float y2 = rnd.Next(100, 600);
 
-            LineShape line = new LineShape(new RectangleF(x, y, x2 - x, y2 - y));
-            ShapeList.Add(line);
+			// Гарантираме, че RectangleF ще има правилна позиция и размери
+			float rectX = Math.Min(x, x2);
+			float rectY = Math.Min(y, y2);
+			float width = Math.Abs(x2 - x);
+			float height = Math.Abs(y2 - y);
+
+			LineShape line = new LineShape(new RectangleF(rectX, rectY, width, height));
+			ShapeList.Add(line);
         }
 
         public void AddRandomPoint()
