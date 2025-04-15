@@ -49,9 +49,8 @@ namespace Draw
 			get { return lastLocation; }
 			set { lastLocation = value; }
 		}
-		
 		#endregion
-		
+
 		/// <summary>
 		/// Добавя примитив - правоъгълник на произволно място върху клиентската област.
 		/// </summary>
@@ -201,7 +200,35 @@ namespace Draw
             // Обновяваме последната позиция
             LastLocation = newLocation;
         }
-        public void GroupSelectedShapes()
+
+		public void TranslateGroupTo(GroupShape group, PointF newLocation)
+		{
+			// Изчислиме правилната разлика спрямо предишната мишка
+			float dx = newLocation.X - LastLocation.X;
+			float dy = newLocation.Y - LastLocation.Y;
+
+			foreach (var shape in group.SubShapes)
+			{
+				// Вземи обратната ротация на всяка фигура
+				Matrix inverseRotation = shape.Rotation.Clone();
+				inverseRotation.Invert();
+
+				// Преобразувай delta в локалната координатна система на фигурата
+				PointF[] delta = new PointF[] { new PointF(dx, dy) };
+				inverseRotation.TransformVectors(delta);
+
+				shape.Location = new PointF(
+					shape.Location.X + delta[0].X,
+					shape.Location.Y + delta[0].Y
+				);
+			}
+
+			// Обнови последната позиция на мишката
+			LastLocation = newLocation;
+		}
+
+
+		public void GroupSelectedShapes()
         {
             if (Selection.Count > 1)
             {
@@ -258,32 +285,67 @@ namespace Draw
 
             if (Selection.Count > 0)
             {
-                if (Selection.Count == 1 && Selection[0] is GroupShape group)
-                {
-                    float minX = float.PositiveInfinity;
-                    float minY = float.PositiveInfinity;
-                    float maxX = float.NegativeInfinity;
-                    float maxY = float.NegativeInfinity;
+				if (Selection.Count == 1 && Selection[0] is GroupShape group)
+				{
+					if (group.IsRotated)
+					{
+						// Взимаме въртяните ъгли
+						List<PointF> allTransformedPoints = new List<PointF>();
 
-                    foreach (Shape shape in Selection)
-                    {
-                        if (shape.Location.X < minX) minX = shape.Location.X;
-                        if (shape.Location.Y < minY) minY = shape.Location.Y;
-                        if (shape.Location.X + shape.Width > maxX)
-                            maxX = shape.Location.X + shape.Width;
-                        if (shape.Location.Y + shape.Height > maxY)
-                            maxY = shape.Location.Y + shape.Height;
-                    }
+						foreach (var shape in group.SubShapes)
+						{
+							PointF[] corners = new PointF[]
+							{
+				                shape.Location,
+				                new PointF(shape.Location.X + shape.Width, shape.Location.Y),
+				                new PointF(shape.Location.X + shape.Width, shape.Location.Y + shape.Height),
+				                new PointF(shape.Location.X, shape.Location.Y + shape.Height)
+							};
 
-                    grfx.DrawRectangle(
-                        Pens.Red,
-                        minX - 5,
-                        minY - 5,
-                        (maxX - minX) + 10,
-                        (maxY - minY) + 10
-                    );
-                }
-            }
-        }
+							shape.Rotation.TransformPoints(corners);
+							allTransformedPoints.AddRange(corners);
+						}
+
+						float minX = allTransformedPoints.Min(p => p.X);
+						float minY = allTransformedPoints.Min(p => p.Y);
+						float maxX = allTransformedPoints.Max(p => p.X);
+						float maxY = allTransformedPoints.Max(p => p.Y);
+
+						grfx.DrawRectangle(
+							Pens.Red,
+							minX - 5,
+							minY - 5,
+							(maxX - minX) + 10,
+							(maxY - minY) + 10
+						);
+					}
+					else
+					{
+						// Класическия bounding box
+						float minX = float.PositiveInfinity;
+						float minY = float.PositiveInfinity;
+						float maxX = float.NegativeInfinity;
+						float maxY = float.NegativeInfinity;
+
+						foreach (var shape in group.SubShapes)
+						{
+							if (shape.Location.X < minX) minX = shape.Location.X;
+							if (shape.Location.Y < minY) minY = shape.Location.Y;
+							if (shape.Location.X + shape.Width > maxX) maxX = shape.Location.X + shape.Width;
+							if (shape.Location.Y + shape.Height > maxY) maxY = shape.Location.Y + shape.Height;
+						}
+
+						grfx.DrawRectangle(
+							Pens.Red,
+							minX - 5,
+							minY - 5,
+							(maxX - minX) + 10,
+							(maxY - minY) + 10
+						);
+					}
+				}
+
+			}
+		}
     }
 }

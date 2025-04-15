@@ -77,6 +77,7 @@
     <Compile Include="src\GUI\Program.cs" />
     <Compile Include="src\Model\EllipseShape.cs" />
     <Compile Include="src\Model\GroupShape.cs" />
+    <Compile Include="src\Model\Helpers\GeometryUtils.cs" />
     <Compile Include="src\Model\LineShape.cs" />
     <Compile Include="src\Model\PointShape.cs" />
     <Compile Include="src\Model\RectangleShape.cs" />

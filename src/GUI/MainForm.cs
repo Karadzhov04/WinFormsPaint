@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Security.Cryptography;
+using Draw.src.Model.Helpers;
 
 
 namespace Draw
@@ -119,15 +120,17 @@ namespace Draw
             if (dialogProcessor.IsDragging && dialogProcessor.Selection.Count > 0)
             {
                 statusBar.Items[0].Text = "Последно действие: Влачене";
-
-                // Транслираме всички селектирани обекти на новата позиция
-                dialogProcessor.TranslateTo(e.Location);
-
-                viewPort.Invalidate();
+				if (dialogProcessor.Selection.Count == 1 && dialogProcessor.Selection[0] is GroupShape group)
+				{
+					dialogProcessor.TranslateGroupTo(group, e.Location);
+				}
+				else
+				{
+					dialogProcessor.TranslateTo(e.Location);
+				}
+				viewPort.Invalidate();
             }
         }
-
-
         /// <summary>
         /// Прихващане на отпускането на бутона на мишката.
         /// Излизаме от режим "влачене".
@@ -294,7 +297,13 @@ namespace Draw
         {
             float angle = float.Parse(Microsoft.VisualBasic.Interaction.InputBox("Въведете стойност:"));
 
-            if (dialogProcessor.Selection.Count > 0)
+			if (dialogProcessor.Selection.Count == 1 && dialogProcessor.Selection[0] is GroupShape group)
+			{
+				// Ако избраната фигура е група, я разгрупираме
+				group.RotateGroup(angle);
+			}
+
+			else if (dialogProcessor.Selection.Count > 0)
             {
                 foreach (Shape shape in dialogProcessor.Selection)
                 {
@@ -307,27 +316,11 @@ namespace Draw
                     shape.Rotation.RotateAt(angle, center);
 
                     // Актуализираме позицията след ротацията
-                    shape.Location = RotatePoint(shape.Location, center, angle);
+                    shape.Location = GeometryUtils.RotatePoint(shape.Location, center, angle);
                 }
-                viewPort.Invalidate();
             }
-        }
-
-        // Метод за ротация на точка около център
-        private PointF RotatePoint(PointF point, PointF center, float angle)
-        {
-            double radians = angle * (Math.PI / 180); // Конвертираме градуси в радиани
-            float cos = (float)Math.Cos(radians);
-            float sin = (float)Math.Sin(radians);
-
-            float dx = point.X - center.X;
-            float dy = point.Y - center.Y;
-
-            return new PointF(
-                center.X + (dx * cos - dy * sin),
-                center.Y + (dx * sin + dy * cos)
-            );
-        }
+			viewPort.Invalidate();
+		}
 
         private void numericUpDownScaleChange(object sender, EventArgs e)
         {
@@ -335,16 +328,20 @@ namespace Draw
 
             if (dialogProcessor.Selection.Count > 0) 
             {
+                if (dialogProcessor.Selection.Count == 1 && dialogProcessor.Selection[0] is GroupShape group)
+                {
+                    foreach (Shape shape in group.SubShapes)
+                    {
+                        shape.Scale = scale;
+                    }
+                }
                 foreach (Shape shape in dialogProcessor.Selection)
                 {
                     shape.Scale = scale;
                 }            
             }
-
-
             viewPort.Invalidate();
         }
-
         private void RemoveGradientsButton_Click(object sender, EventArgs e)
         {
             if (dialogProcessor.Selection.Count > 0)
