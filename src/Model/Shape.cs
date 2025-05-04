@@ -134,25 +134,44 @@ namespace Draw
             get { return scale; }
             set { scale = value; }
         }
-        #endregion
+
+		private string name;
+		public virtual string Name
+		{
+			get { return name; }
+			set { name = value; }
+		}
+		#endregion
 
 
-        /// <summary>
-        /// Проверка дали точка point принадлежи на елемента.
-        /// </summary>
-        /// <param name="point">Точка</param>
-        /// <returns>Връща true, ако точката принадлежи на елемента и
-        /// false, ако не пренадлежи</returns>
-        public virtual bool Contains(PointF point)
+		/// <summary>
+		/// Проверка дали точка point принадлежи на елемента.
+		/// </summary>
+		/// <param name="point">Точка</param>
+		/// <returns>Връща true, ако точката принадлежи на елемента и
+		/// false, ако не пренадлежи</returns>
+		public virtual bool Contains(PointF point)
 		{
 			return Rectangle.Contains(point.X, point.Y);
 		}
 
-        /// <summary>
-        /// Визуализира елемента.
-        /// </summary>
-        /// <param name="grfx">Къде да бъде визуализиран елемента.</param>
-        public virtual void DrawSelf(Graphics grfx)
+		public PointF ToLocal(PointF point)
+		{
+			Matrix transform = this.Rotation.Clone();
+			transform.Translate(this.Location.X, this.Location.Y, MatrixOrder.Append);
+			transform.Invert();
+
+			PointF[] points = new PointF[] { point };
+			transform.TransformPoints(points);
+			return points[0];
+		}
+
+
+		/// <summary>
+		/// Визуализира елемента.
+		/// </summary>
+		/// <param name="grfx">Къде да бъде визуализиран елемента.</param>
+		public virtual void DrawSelf(Graphics grfx)
 		{
 			// shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
 		}

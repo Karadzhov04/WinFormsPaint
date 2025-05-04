@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Draw.src.Model.Helpers;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -18,7 +19,7 @@ namespace Draw
 		public RectangleShape(RectangleShape rectangle) : base(rectangle)
 		{
 		}
-		
+
 		#endregion
 
 		/// <summary>
@@ -30,19 +31,13 @@ namespace Draw
 		/// </summary>
 		public override bool Contains(PointF point)
 		{
-			if (base.Contains(point))
-				// Проверка дали е в обекта само, ако точката е в обхващащия правоъгълник.
-				// В случая на правоъгълник - директно връщаме true
-				return true;
-			else
-				// Ако не е в обхващащия правоъгълник, то неможе да е в обекта и => false
-				return false;
+			PointF local = GeometryUtils.ToLocal(point, this);
+			return new RectangleF(0, 0, Width, Height).Contains(local);
 		}
-		
-		/// <summary>
-		/// Частта, визуализираща конкретния примитив.
-		/// </summary>
-		public override void DrawSelf(Graphics grfx)
+	/// <summary>
+	/// Частта, визуализираща конкретния примитив.
+	/// </summary>
+	public override void DrawSelf(Graphics grfx)
 		{
             base.DrawSelf(grfx);
 

@@ -28,124 +28,127 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusBar = new System.Windows.Forms.StatusStrip();
-            this.currentStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.speedMenu = new System.Windows.Forms.ToolStrip();
-            this.drawRectangleSpeedButton = new System.Windows.Forms.ToolStripButton();
-            this.pickUpSpeedButton = new System.Windows.Forms.ToolStripButton();
-            this.drawStarSpeedButton = new System.Windows.Forms.ToolStripButton();
-            this.ColorPickerButton = new System.Windows.Forms.ToolStripButton();
-            this.drawElipseSpeedButton = new System.Windows.Forms.ToolStripButton();
-            this.drawLineSpeedButton = new System.Windows.Forms.ToolStripButton();
-            this.drawPointSpeedButton = new System.Windows.Forms.ToolStripButton();
-            this.CheckPointInPolygonButton = new System.Windows.Forms.ToolStripButton();
-            this.rotatePrimitiveSpeedButton = new System.Windows.Forms.ToolStripButton();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.trackBarStroke = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.trackBarTransparency = new System.Windows.Forms.TrackBar();
-            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.colorDialog3 = new System.Windows.Forms.ColorDialog();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.numericUpDownScale = new System.Windows.Forms.NumericUpDown();
-            this.RemoveGradientsButton = new System.Windows.Forms.Button();
-            this.viewPort = new Draw.DoubleBufferedPanel();
-            this.GroupingButton = new System.Windows.Forms.ToolStripButton();
-            this.mainMenu.SuspendLayout();
-            this.statusBar.SuspendLayout();
-            this.speedMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarStroke)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarTransparency)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownScale)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // mainMenu
-            // 
-            this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			this.mainMenu = new System.Windows.Forms.MenuStrip();
+			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.statusBar = new System.Windows.Forms.StatusStrip();
+			this.currentStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.speedMenu = new System.Windows.Forms.ToolStrip();
+			this.drawRectangleSpeedButton = new System.Windows.Forms.ToolStripButton();
+			this.pickUpSpeedButton = new System.Windows.Forms.ToolStripButton();
+			this.drawStarSpeedButton = new System.Windows.Forms.ToolStripButton();
+			this.ColorPickerButton = new System.Windows.Forms.ToolStripButton();
+			this.drawElipseSpeedButton = new System.Windows.Forms.ToolStripButton();
+			this.drawLineSpeedButton = new System.Windows.Forms.ToolStripButton();
+			this.drawPointSpeedButton = new System.Windows.Forms.ToolStripButton();
+			this.CheckPointInPolygonButton = new System.Windows.Forms.ToolStripButton();
+			this.rotatePrimitiveSpeedButton = new System.Windows.Forms.ToolStripButton();
+			this.GroupingButton = new System.Windows.Forms.ToolStripButton();
+			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+			this.trackBarStroke = new System.Windows.Forms.TrackBar();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.trackBarTransparency = new System.Windows.Forms.TrackBar();
+			this.colorDialog2 = new System.Windows.Forms.ColorDialog();
+			this.button1 = new System.Windows.Forms.Button();
+			this.colorDialog3 = new System.Windows.Forms.ColorDialog();
+			this.button2 = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
+			this.numericUpDownScale = new System.Windows.Forms.NumericUpDown();
+			this.RemoveGradientsButton = new System.Windows.Forms.Button();
+			this.textBoxNameObject = new System.Windows.Forms.TextBox();
+			this.button4 = new System.Windows.Forms.Button();
+			this.viewPort = new Draw.DoubleBufferedPanel();
+			this.button5 = new System.Windows.Forms.Button();
+			this.mainMenu.SuspendLayout();
+			this.statusBar.SuspendLayout();
+			this.speedMenu.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarStroke)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarTransparency)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownScale)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// mainMenu
+			// 
+			this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.imageToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.mainMenu.Location = new System.Drawing.Point(0, 0);
-            this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(924, 30);
-            this.mainMenu.TabIndex = 1;
-            this.mainMenu.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.mainMenu.Location = new System.Drawing.Point(0, 0);
+			this.mainMenu.Name = "mainMenu";
+			this.mainMenu.Size = new System.Drawing.Size(924, 28);
+			this.mainMenu.TabIndex = 1;
+			this.mainMenu.Text = "menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // imageToolStripMenuItem
-            // 
-            this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(65, 26);
-            this.imageToolStripMenuItem.Text = "Image";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+			this.fileToolStripMenuItem.Text = "File";
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
+			// 
+			// editToolStripMenuItem
+			// 
+			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+			this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+			this.editToolStripMenuItem.Text = "Edit";
+			// 
+			// imageToolStripMenuItem
+			// 
+			this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
+			this.imageToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+			this.imageToolStripMenuItem.Text = "Image";
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
-            this.aboutToolStripMenuItem.Text = "About...";
-            // 
-            // statusBar
-            // 
-            this.statusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+			this.helpToolStripMenuItem.Text = "Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
+			this.aboutToolStripMenuItem.Text = "About...";
+			// 
+			// statusBar
+			// 
+			this.statusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentStatusLabel});
-            this.statusBar.Location = new System.Drawing.Point(0, 499);
-            this.statusBar.Name = "statusBar";
-            this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusBar.Size = new System.Drawing.Size(924, 22);
-            this.statusBar.TabIndex = 2;
-            this.statusBar.Text = "statusStrip1";
-            // 
-            // currentStatusLabel
-            // 
-            this.currentStatusLabel.Name = "currentStatusLabel";
-            this.currentStatusLabel.Size = new System.Drawing.Size(0, 16);
-            // 
-            // speedMenu
-            // 
-            this.speedMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.speedMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.statusBar.Location = new System.Drawing.Point(0, 499);
+			this.statusBar.Name = "statusBar";
+			this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+			this.statusBar.Size = new System.Drawing.Size(924, 22);
+			this.statusBar.TabIndex = 2;
+			this.statusBar.Text = "statusStrip1";
+			// 
+			// currentStatusLabel
+			// 
+			this.currentStatusLabel.Name = "currentStatusLabel";
+			this.currentStatusLabel.Size = new System.Drawing.Size(0, 16);
+			// 
+			// speedMenu
+			// 
+			this.speedMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.speedMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.drawRectangleSpeedButton,
             this.pickUpSpeedButton,
             this.drawStarSpeedButton,
@@ -156,249 +159,279 @@
             this.CheckPointInPolygonButton,
             this.rotatePrimitiveSpeedButton,
             this.GroupingButton});
-            this.speedMenu.Location = new System.Drawing.Point(0, 30);
-            this.speedMenu.Name = "speedMenu";
-            this.speedMenu.Size = new System.Drawing.Size(924, 31);
-            this.speedMenu.TabIndex = 3;
-            this.speedMenu.Text = "toolStrip1";
-            // 
-            // drawRectangleSpeedButton
-            // 
-            this.drawRectangleSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.drawRectangleSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawRectangleSpeedButton.Image")));
-            this.drawRectangleSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.drawRectangleSpeedButton.Name = "drawRectangleSpeedButton";
-            this.drawRectangleSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.drawRectangleSpeedButton.Text = "DrawRectangleButton";
-            this.drawRectangleSpeedButton.Click += new System.EventHandler(this.DrawRectangleSpeedButtonClick);
-            // 
-            // pickUpSpeedButton
-            // 
-            this.pickUpSpeedButton.CheckOnClick = true;
-            this.pickUpSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pickUpSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("pickUpSpeedButton.Image")));
-            this.pickUpSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pickUpSpeedButton.Name = "pickUpSpeedButton";
-            this.pickUpSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.pickUpSpeedButton.Text = "toolStripButton1";
-            // 
-            // drawStarSpeedButton
-            // 
-            this.drawStarSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.drawStarSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawStarSpeedButton.Image")));
-            this.drawStarSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.drawStarSpeedButton.Name = "drawStarSpeedButton";
-            this.drawStarSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.drawStarSpeedButton.Text = "toolStripButton1";
-            this.drawStarSpeedButton.Click += new System.EventHandler(this.drawStarSpeedButtonClick);
-            // 
-            // ColorPickerButton
-            // 
-            this.ColorPickerButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ColorPickerButton.Image = ((System.Drawing.Image)(resources.GetObject("ColorPickerButton.Image")));
-            this.ColorPickerButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ColorPickerButton.Name = "ColorPickerButton";
-            this.ColorPickerButton.Size = new System.Drawing.Size(29, 28);
-            this.ColorPickerButton.Text = "toolStripButton1";
-            this.ColorPickerButton.Click += new System.EventHandler(this.ColorPickerButtonClicked);
-            // 
-            // drawElipseSpeedButton
-            // 
-            this.drawElipseSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.drawElipseSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawElipseSpeedButton.Image")));
-            this.drawElipseSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.drawElipseSpeedButton.Name = "drawElipseSpeedButton";
-            this.drawElipseSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.drawElipseSpeedButton.Text = "toolStripButton1";
-            this.drawElipseSpeedButton.Click += new System.EventHandler(this.drawElipseSpeedButtonClick);
-            // 
-            // drawLineSpeedButton
-            // 
-            this.drawLineSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.drawLineSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawLineSpeedButton.Image")));
-            this.drawLineSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.drawLineSpeedButton.Name = "drawLineSpeedButton";
-            this.drawLineSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.drawLineSpeedButton.Text = "toolStripButton1";
-            this.drawLineSpeedButton.Click += new System.EventHandler(this.drawLineSpeedButtonClick);
-            // 
-            // drawPointSpeedButton
-            // 
-            this.drawPointSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.drawPointSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawPointSpeedButton.Image")));
-            this.drawPointSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.drawPointSpeedButton.Name = "drawPointSpeedButton";
-            this.drawPointSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.drawPointSpeedButton.Text = "toolStripButton1";
-            this.drawPointSpeedButton.Click += new System.EventHandler(this.drawPointSpeedButtonClick);
-            // 
-            // CheckPointInPolygonButton
-            // 
-            this.CheckPointInPolygonButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CheckPointInPolygonButton.Image = ((System.Drawing.Image)(resources.GetObject("CheckPointInPolygonButton.Image")));
-            this.CheckPointInPolygonButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CheckPointInPolygonButton.Name = "CheckPointInPolygonButton";
-            this.CheckPointInPolygonButton.Size = new System.Drawing.Size(29, 28);
-            this.CheckPointInPolygonButton.Text = "CheckPoint";
-            this.CheckPointInPolygonButton.Click += new System.EventHandler(this.CheckPointInPolygonClick);
-            // 
-            // rotatePrimitiveSpeedButton
-            // 
-            this.rotatePrimitiveSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.rotatePrimitiveSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("rotatePrimitiveSpeedButton.Image")));
-            this.rotatePrimitiveSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.rotatePrimitiveSpeedButton.Name = "rotatePrimitiveSpeedButton";
-            this.rotatePrimitiveSpeedButton.Size = new System.Drawing.Size(29, 28);
-            this.rotatePrimitiveSpeedButton.Text = "toolStripButton1";
-            this.rotatePrimitiveSpeedButton.Click += new System.EventHandler(this.rotatePrimitiveSpeedButton_Click);
-            // 
-            // trackBarStroke
-            // 
-            this.trackBarStroke.Location = new System.Drawing.Point(336, 25);
-            this.trackBarStroke.Name = "trackBarStroke";
-            this.trackBarStroke.Size = new System.Drawing.Size(89, 56);
-            this.trackBarStroke.TabIndex = 5;
-            this.trackBarStroke.ValueChanged += new System.EventHandler(this.trackBarStroke_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(355, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Stroke";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(458, 79);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 16);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Transparency";
-            // 
-            // trackBarTransparency
-            // 
-            this.trackBarTransparency.Location = new System.Drawing.Point(461, 20);
-            this.trackBarTransparency.Maximum = 255;
-            this.trackBarTransparency.Name = "trackBarTransparency";
-            this.trackBarTransparency.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.trackBarTransparency.Size = new System.Drawing.Size(88, 56);
-            this.trackBarTransparency.TabIndex = 9;
-            this.trackBarTransparency.ValueChanged += new System.EventHandler(this.TransparencyButtonClicked);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(302, 79);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Choose stroke color";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.StrokeColorPickerClicked);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(613, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 56);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Choose GradientColor1";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.GradientColor1PickerClicked);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(613, 74);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(110, 60);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "Choose GradientColor2";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.GradientColor2PickerClicked);
-            // 
-            // numericUpDownScale
-            // 
-            this.numericUpDownScale.Location = new System.Drawing.Point(749, 20);
-            this.numericUpDownScale.Minimum = new decimal(new int[] {
+			this.speedMenu.Location = new System.Drawing.Point(0, 28);
+			this.speedMenu.Name = "speedMenu";
+			this.speedMenu.Size = new System.Drawing.Size(924, 27);
+			this.speedMenu.TabIndex = 3;
+			this.speedMenu.Text = "toolStrip1";
+			// 
+			// drawRectangleSpeedButton
+			// 
+			this.drawRectangleSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.drawRectangleSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawRectangleSpeedButton.Image")));
+			this.drawRectangleSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.drawRectangleSpeedButton.Name = "drawRectangleSpeedButton";
+			this.drawRectangleSpeedButton.Size = new System.Drawing.Size(29, 24);
+			this.drawRectangleSpeedButton.Text = "DrawRectangleButton";
+			this.drawRectangleSpeedButton.Click += new System.EventHandler(this.DrawRectangleSpeedButtonClick);
+			// 
+			// pickUpSpeedButton
+			// 
+			this.pickUpSpeedButton.CheckOnClick = true;
+			this.pickUpSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.pickUpSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("pickUpSpeedButton.Image")));
+			this.pickUpSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.pickUpSpeedButton.Name = "pickUpSpeedButton";
+			this.pickUpSpeedButton.Size = new System.Drawing.Size(29, 24);
+			this.pickUpSpeedButton.Text = "toolStripButton1";
+			// 
+			// drawStarSpeedButton
+			// 
+			this.drawStarSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.drawStarSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawStarSpeedButton.Image")));
+			this.drawStarSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.drawStarSpeedButton.Name = "drawStarSpeedButton";
+			this.drawStarSpeedButton.Size = new System.Drawing.Size(29, 24);
+			this.drawStarSpeedButton.Text = "toolStripButton1";
+			this.drawStarSpeedButton.Click += new System.EventHandler(this.drawStarSpeedButtonClick);
+			// 
+			// ColorPickerButton
+			// 
+			this.ColorPickerButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.ColorPickerButton.Image = ((System.Drawing.Image)(resources.GetObject("ColorPickerButton.Image")));
+			this.ColorPickerButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ColorPickerButton.Name = "ColorPickerButton";
+			this.ColorPickerButton.Size = new System.Drawing.Size(29, 24);
+			this.ColorPickerButton.Text = "toolStripButton1";
+			this.ColorPickerButton.Click += new System.EventHandler(this.ColorPickerButtonClicked);
+			// 
+			// drawElipseSpeedButton
+			// 
+			this.drawElipseSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.drawElipseSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawElipseSpeedButton.Image")));
+			this.drawElipseSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.drawElipseSpeedButton.Name = "drawElipseSpeedButton";
+			this.drawElipseSpeedButton.Size = new System.Drawing.Size(29, 24);
+			this.drawElipseSpeedButton.Text = "toolStripButton1";
+			this.drawElipseSpeedButton.Click += new System.EventHandler(this.drawElipseSpeedButtonClick);
+			// 
+			// drawLineSpeedButton
+			// 
+			this.drawLineSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.drawLineSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawLineSpeedButton.Image")));
+			this.drawLineSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.drawLineSpeedButton.Name = "drawLineSpeedButton";
+			this.drawLineSpeedButton.Size = new System.Drawing.Size(29, 24);
+			this.drawLineSpeedButton.Text = "toolStripButton1";
+			this.drawLineSpeedButton.Click += new System.EventHandler(this.drawLineSpeedButtonClick);
+			// 
+			// drawPointSpeedButton
+			// 
+			this.drawPointSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.drawPointSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawPointSpeedButton.Image")));
+			this.drawPointSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.drawPointSpeedButton.Name = "drawPointSpeedButton";
+			this.drawPointSpeedButton.Size = new System.Drawing.Size(29, 24);
+			this.drawPointSpeedButton.Text = "toolStripButton1";
+			this.drawPointSpeedButton.Click += new System.EventHandler(this.drawPointSpeedButtonClick);
+			// 
+			// CheckPointInPolygonButton
+			// 
+			this.CheckPointInPolygonButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.CheckPointInPolygonButton.Image = ((System.Drawing.Image)(resources.GetObject("CheckPointInPolygonButton.Image")));
+			this.CheckPointInPolygonButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.CheckPointInPolygonButton.Name = "CheckPointInPolygonButton";
+			this.CheckPointInPolygonButton.Size = new System.Drawing.Size(29, 24);
+			this.CheckPointInPolygonButton.Text = "CheckPoint";
+			this.CheckPointInPolygonButton.Click += new System.EventHandler(this.CheckPointInPolygonClick);
+			// 
+			// rotatePrimitiveSpeedButton
+			// 
+			this.rotatePrimitiveSpeedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.rotatePrimitiveSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("rotatePrimitiveSpeedButton.Image")));
+			this.rotatePrimitiveSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.rotatePrimitiveSpeedButton.Name = "rotatePrimitiveSpeedButton";
+			this.rotatePrimitiveSpeedButton.Size = new System.Drawing.Size(29, 24);
+			this.rotatePrimitiveSpeedButton.Text = "toolStripButton1";
+			this.rotatePrimitiveSpeedButton.Click += new System.EventHandler(this.rotatePrimitiveSpeedButton_Click);
+			// 
+			// GroupingButton
+			// 
+			this.GroupingButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.GroupingButton.Image = ((System.Drawing.Image)(resources.GetObject("GroupingButton.Image")));
+			this.GroupingButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.GroupingButton.Name = "GroupingButton";
+			this.GroupingButton.Size = new System.Drawing.Size(29, 24);
+			this.GroupingButton.Text = "toolStripButton1";
+			this.GroupingButton.Click += new System.EventHandler(this.GroupingButton_Click);
+			// 
+			// trackBarStroke
+			// 
+			this.trackBarStroke.Location = new System.Drawing.Point(336, 25);
+			this.trackBarStroke.Name = "trackBarStroke";
+			this.trackBarStroke.Size = new System.Drawing.Size(89, 56);
+			this.trackBarStroke.TabIndex = 5;
+			this.trackBarStroke.ValueChanged += new System.EventHandler(this.trackBarStroke_ValueChanged);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(355, 58);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(46, 16);
+			this.label1.TabIndex = 6;
+			this.label1.Text = "Stroke";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(458, 79);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(91, 16);
+			this.label2.TabIndex = 7;
+			this.label2.Text = "Transparency";
+			// 
+			// trackBarTransparency
+			// 
+			this.trackBarTransparency.Location = new System.Drawing.Point(461, 20);
+			this.trackBarTransparency.Maximum = 255;
+			this.trackBarTransparency.Name = "trackBarTransparency";
+			this.trackBarTransparency.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.trackBarTransparency.Size = new System.Drawing.Size(88, 56);
+			this.trackBarTransparency.TabIndex = 9;
+			this.trackBarTransparency.ValueChanged += new System.EventHandler(this.TransparencyButtonClicked);
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(302, 79);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(150, 23);
+			this.button1.TabIndex = 10;
+			this.button1.Text = "Choose stroke color";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.StrokeColorPickerClicked);
+			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(613, 12);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(110, 56);
+			this.button2.TabIndex = 11;
+			this.button2.Text = "Choose GradientColor1";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.GradientColor1PickerClicked);
+			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(613, 74);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(110, 60);
+			this.button3.TabIndex = 12;
+			this.button3.Text = "Choose GradientColor2";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.GradientColor2PickerClicked);
+			// 
+			// numericUpDownScale
+			// 
+			this.numericUpDownScale.Location = new System.Drawing.Point(749, 20);
+			this.numericUpDownScale.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.numericUpDownScale.Name = "numericUpDownScale";
-            this.numericUpDownScale.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDownScale.TabIndex = 13;
-            this.numericUpDownScale.ValueChanged += new System.EventHandler(this.numericUpDownScaleChange);
-            // 
-            // RemoveGradientsButton
-            // 
-            this.RemoveGradientsButton.Location = new System.Drawing.Point(613, 140);
-            this.RemoveGradientsButton.Name = "RemoveGradientsButton";
-            this.RemoveGradientsButton.Size = new System.Drawing.Size(110, 52);
-            this.RemoveGradientsButton.TabIndex = 14;
-            this.RemoveGradientsButton.Text = "Remove Gradients";
-            this.RemoveGradientsButton.UseVisualStyleBackColor = true;
-            this.RemoveGradientsButton.Click += new System.EventHandler(this.RemoveGradientsButton_Click);
-            // 
-            // viewPort
-            // 
-            this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPort.Location = new System.Drawing.Point(0, 61);
-            this.viewPort.Margin = new System.Windows.Forms.Padding(5);
-            this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(924, 438);
-            this.viewPort.TabIndex = 4;
-            this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
-            this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
-            this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
-            this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
-            // 
-            // GroupingButton
-            // 
-            this.GroupingButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.GroupingButton.Image = ((System.Drawing.Image)(resources.GetObject("GroupingButton.Image")));
-            this.GroupingButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.GroupingButton.Name = "GroupingButton";
-            this.GroupingButton.Size = new System.Drawing.Size(29, 28);
-            this.GroupingButton.Text = "toolStripButton1";
-            this.GroupingButton.Click += new System.EventHandler(this.GroupingButton_Click);
-            // 
-            // MainForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 521);
-            this.Controls.Add(this.RemoveGradientsButton);
-            this.Controls.Add(this.numericUpDownScale);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.trackBarTransparency);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.trackBarStroke);
-            this.Controls.Add(this.viewPort);
-            this.Controls.Add(this.speedMenu);
-            this.Controls.Add(this.statusBar);
-            this.Controls.Add(this.mainMenu);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "MainForm";
-            this.Text = "Draw";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.mainMenu.ResumeLayout(false);
-            this.mainMenu.PerformLayout();
-            this.statusBar.ResumeLayout(false);
-            this.statusBar.PerformLayout();
-            this.speedMenu.ResumeLayout(false);
-            this.speedMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarStroke)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarTransparency)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownScale)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			this.numericUpDownScale.Name = "numericUpDownScale";
+			this.numericUpDownScale.Size = new System.Drawing.Size(120, 22);
+			this.numericUpDownScale.TabIndex = 13;
+			this.numericUpDownScale.ValueChanged += new System.EventHandler(this.numericUpDownScaleChange);
+			// 
+			// RemoveGradientsButton
+			// 
+			this.RemoveGradientsButton.Location = new System.Drawing.Point(613, 140);
+			this.RemoveGradientsButton.Name = "RemoveGradientsButton";
+			this.RemoveGradientsButton.Size = new System.Drawing.Size(110, 52);
+			this.RemoveGradientsButton.TabIndex = 14;
+			this.RemoveGradientsButton.Text = "Remove Gradients";
+			this.RemoveGradientsButton.UseVisualStyleBackColor = true;
+			this.RemoveGradientsButton.Click += new System.EventHandler(this.RemoveGradientsButton_Click);
+			// 
+			// textBoxNameObject
+			// 
+			this.textBoxNameObject.Location = new System.Drawing.Point(12, 93);
+			this.textBoxNameObject.Name = "textBoxNameObject";
+			this.textBoxNameObject.Size = new System.Drawing.Size(100, 22);
+			this.textBoxNameObject.TabIndex = 15;
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(115, 65);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(106, 47);
+			this.button4.TabIndex = 16;
+			this.button4.Text = "Потърси обект";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.SearchPrimitive);
+			// 
+			// viewPort
+			// 
+			this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.viewPort.Location = new System.Drawing.Point(0, 55);
+			this.viewPort.Margin = new System.Windows.Forms.Padding(5);
+			this.viewPort.Name = "viewPort";
+			this.viewPort.Size = new System.Drawing.Size(924, 444);
+			this.viewPort.TabIndex = 4;
+			this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
+			this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
+			this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
+			this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
+			// 
+			// button5
+			// 
+			this.button5.Location = new System.Drawing.Point(115, 118);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(106, 32);
+			this.button5.TabIndex = 17;
+			this.button5.Text = "задай цвят";
+			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.giveColor);
+			// 
+			// MainForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(924, 521);
+			this.Controls.Add(this.button5);
+			this.Controls.Add(this.button4);
+			this.Controls.Add(this.textBoxNameObject);
+			this.Controls.Add(this.RemoveGradientsButton);
+			this.Controls.Add(this.numericUpDownScale);
+			this.Controls.Add(this.button3);
+			this.Controls.Add(this.button2);
+			this.Controls.Add(this.button1);
+			this.Controls.Add(this.trackBarTransparency);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.trackBarStroke);
+			this.Controls.Add(this.viewPort);
+			this.Controls.Add(this.speedMenu);
+			this.Controls.Add(this.statusBar);
+			this.Controls.Add(this.mainMenu);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MainMenuStrip = this.mainMenu;
+			this.Margin = new System.Windows.Forms.Padding(4);
+			this.Name = "MainForm";
+			this.Text = "Draw";
+			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			this.mainMenu.ResumeLayout(false);
+			this.mainMenu.PerformLayout();
+			this.statusBar.ResumeLayout(false);
+			this.statusBar.PerformLayout();
+			this.speedMenu.ResumeLayout(false);
+			this.speedMenu.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarStroke)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarTransparency)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownScale)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 		
@@ -435,5 +468,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDownScale;
         private System.Windows.Forms.Button RemoveGradientsButton;
         private System.Windows.Forms.ToolStripButton GroupingButton;
-    }
+		private System.Windows.Forms.TextBox textBoxNameObject;
+		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button button5;
+	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Draw.src.Model.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -18,26 +19,23 @@ namespace Draw.src.Model
         {
         }
 
-        #endregion
+		#endregion
 
-        public override bool Contains(PointF point)
-        {
-            //TODO
-            float a = Width / 2;
-            float b = Height / 2;
+		public override bool Contains(PointF point)
+		{
+			PointF local = ToLocal(point);
 
-            float xc = Location.X + a;
-            float yc = Location.Y + b;
+			float a = Width / 2;
+			float b = Height / 2;
 
-            PointF[] pointsToConvert = new PointF[] { point };
-            Rotation.Invert();
-            Rotation.TransformPoints(pointsToConvert);
-            Rotation.Invert();
-            PointF localPoint = pointsToConvert[0];
+			float dx = local.X - a;
+			float dy = local.Y - b;
 
-            return Math.Pow((localPoint.X - xc) / a, 2) + Math.Pow((localPoint.Y - yc) / b, 2) - 1 <= 0;
-        }
-        public override void DrawSelf(Graphics grfx)
+			return (dx * dx) / (a * a) + (dy * dy) / (b * b) <= 1;
+		}
+
+
+		public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
             ChangeSize(Scale);

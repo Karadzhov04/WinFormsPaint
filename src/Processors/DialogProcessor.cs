@@ -30,7 +30,14 @@ namespace Draw
 			get { return selection; }
 			set { selection = value; }
 		}
-		
+
+		private List<Shape> allShapes = new List<Shape>();
+		public List<Shape> AllShapes
+		{
+			get { return allShapes; }
+			set { allShapes = value; }
+		}
+
 		/// <summary>
 		/// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
 		/// </summary>
@@ -54,7 +61,7 @@ namespace Draw
 		/// <summary>
 		/// Добавя примитив - правоъгълник на произволно място върху клиентската област.
 		/// </summary>
-		public void AddRandomRectangle()
+		public void AddRandomRectangle(string name)
 		{
 			Random rnd = new Random();
 			int x = rnd.Next(100,1000);
@@ -62,11 +69,12 @@ namespace Draw
 			
 			RectangleShape rect = new RectangleShape(new Rectangle(x,y,100,200));
 			rect.FillColor = Color.White;
+			rect.Name = name;
 
 			ShapeList.Add(rect);
 		}
 
-        public void AddRandomStar()
+        public void AddRandomStar(string name)
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -74,11 +82,12 @@ namespace Draw
 
             StarShape star = new StarShape(new Rectangle(x, y, 100, 200));
             star.FillColor = Color.White;
+			star.Name = name;
 
             ShapeList.Add(star);
         }
 
-        public void AddRandomEllipse()
+        public void AddRandomEllipse(string name)
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -86,12 +95,13 @@ namespace Draw
 
             EllipseShape ellipse = new EllipseShape(new Rectangle(x, y, 100, 200));
             ellipse.FillColor = Color.White;
+			ellipse.Name = name;
 
             ShapeList.Add(ellipse);
         }
 
 
-        public void AddRandomLine()
+        public void AddRandomLine(string name)
         {
             Random rnd = new Random();
 			float x = rnd.Next(100, 1000);
@@ -106,10 +116,12 @@ namespace Draw
 			float height = Math.Abs(y2 - y);
 
 			LineShape line = new LineShape(new RectangleF(rectX, rectY, width, height));
+			line.Name = name;
+
 			ShapeList.Add(line);
         }
 
-        public void AddRandomPoint()
+        public void AddRandomPoint(string name)
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -117,58 +129,51 @@ namespace Draw
 
             float size = 5; // Размер на точката
             PointShape point = new PointShape(new RectangleF(x - size / 2, y - size / 2, size, size));
+
+			point.Name = name;
             ShapeList.Add(point);
         }
-        /// <summary>
-        /// Проверява дали дадена точка е в елемента.
-        /// Обхожда в ред обратен на визуализацията с цел намиране на
-        /// "най-горния" елемент т.е. този който виждаме под мишката.
-        /// </summary>
-        /// <param name="point">Указана точка</param>
-        /// <returns>Елемента на изображението, на който принадлежи дадената точка.</returns>
-        public Shape ContainsPoint(PointF point)
-        {
-            for (int i = ShapeList.Count - 1; i >= 0; i--)
-            {
-                if (ShapeList[i].Contains(point))
-                {
-                    //ShapeList[i].FillColor = Color.Red;
+		/// <summary>
+		/// Проверява дали дадена точка е в елемента.
+		/// Обхожда в ред обратен на визуализацията с цел намиране на
+		/// "най-горния" елемент т.е. този който виждаме под мишката.
+		/// </summary>
+		/// <param name="point">Указана точка</param>
+		/// <returns>Елемента на изображението, на който принадлежи дадената точка.</returns>
+		public Shape ContainsPoint(PointF point)
+		{
+			for (int i = ShapeList.Count - 1; i >= 0; i--)
+			{
+				Shape shape = ShapeList[i];
 
-                    return ShapeList[i];
-                }
-            }
-            return null;
-        }
-        //public List<Shape> ContainsPoint(PointF point)
-        //{
-        //    List<Shape> selectedShapes = new List<Shape>();
+				if (shape is GroupShape group)
+				{
+					// Първо минаваме през подфигурите
+					for (int j = group.SubShapes.Count - 1; j >= 0; j--)
+					{
+						Shape sub = group.SubShapes[j];
 
-        //    for (int i = ShapeList.Count - 1; i >= 0; i--) // Започваме отгоре надолу
-        //    {
-        //        if (ShapeList[i].Contains(point))
-        //        {
-        //            selectedShapes.Add(ShapeList[i]); // Добавяме всички фигури, които съдържат точката
-        //        }
-        //    }
+						if (sub.Contains(point))
+						{
+							return sub; // Връщаме вътрешната фигура, ако я уцелим
+						}
+					}
 
-        //    return selectedShapes; // Връщаме списък с всички попаднали фигури
-        //}
+					// Ако не е в подфигурите, проверяваме цялата група (по избор)
+					if (group.Contains(point))
+					{
+						return group;
+					}
+				}
+				else if (shape.Contains(point))
+				{
+					return shape;
+				}
+			}
 
-        /// <summary>
-        /// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
-        /// </summary>
-        /// <param name="p">Вектор на транслация.</param>
-        //      public void TranslateTo(PointF p)
-        //{
-        //	if (selection.Count > 0) {
-        //		foreach (Shape shape in selection)
-        //		{
-        //                  shape.Location = new PointF(shape.Location.X + p.X - lastLocation.X, shape.Location.Y + p.Y - lastLocation.Y);	
-        //		}
-
-        //              lastLocation = p;
-        //          }
-        public void TranslateTo(PointF newLocation)
+			return null;
+		}
+		public void TranslateTo(PointF newLocation)
         {
             if (Selection.Count == 0) return;
 
@@ -190,15 +195,19 @@ namespace Draw
 
                 // Преобразуваме вектора на изместване спрямо ротацията
                 PointF[] delta = new PointF[] { new PointF(dx, dy) };
-                inverseRotation.TransformVectors(delta);
+                inverseRotation.TransformVectors(delta);//Ако фигурата не беше завъртяна, в каква посока щеше да е движението?"
 
-                // Актуализираме позицията на фигурата
-                shape.Location = new PointF(shape.Location.X + delta[0].X, shape.Location.Y + delta[0].Y);
+				// Актуализираме позицията на фигурата
+				shape.Location = new PointF(shape.Location.X + delta[0].X, shape.Location.Y + delta[0].Y);
+				/*
+				 първо взимаме това колко градуса е завъртяна, после я връщаме в първоначалният вид,
+				 където чрез dx и DY и прилагаме правилна посока на векторите в правилната координатна система и даваме тези нови 
+				 координати на фигурата
+				*/
+			}
 
-            }
-
-            // Обновяваме последната позиция
-            LastLocation = newLocation;
+			// Обновяваме последната позиция
+			LastLocation = newLocation;
         }
 
 		public void TranslateGroupTo(GroupShape group, PointF newLocation)
@@ -222,11 +231,9 @@ namespace Draw
 					shape.Location.Y + delta[0].Y
 				);
 			}
-
 			// Обнови последната позиция на мишката
 			LastLocation = newLocation;
 		}
-
 
 		public void GroupSelectedShapes()
         {
@@ -347,5 +354,33 @@ namespace Draw
 
 			}
 		}
-    }
+		public GroupShape GetParentGroupOfShape(Shape shape)
+		{
+			foreach (var item in ShapeList)
+			{
+				if (item is GroupShape group && group.SubShapes.Contains(shape))
+				{
+					return group;
+				}
+			}
+			return null;
+		}
+
+		public void UngroupShapeFromGroup(GroupShape group, Shape shapeToRemove)
+		{
+			if (group.SubShapes.Contains(shapeToRemove))
+			{
+				group.SubShapes.Remove(shapeToRemove); // Махаме фигурата от групата
+				ShapeList.Add(shapeToRemove); // Добавяме я обратно в основния списък
+
+				// Ако групата остане празна, махаме и нея
+				if (group.SubShapes.Count == 0)
+				{
+					ShapeList.Remove(group);
+				}
+			}
+		}
+
+
+	}
 }

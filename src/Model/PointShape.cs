@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,15 @@ namespace Draw.src.Model
             //Pen pen = new Pen(StrokeColor, Stroke);
             Color color = Color.FromArgb(255 - Transparency, FillColor);
 
-            grfx.FillEllipse(new SolidBrush(color), Rectangle);
+
+			Matrix oldTransform = grfx.Transform;
+
+			// Прилагаме ротация само на тази фигура
+			grfx.Transform = Rotation;
+
+			grfx.FillEllipse(new SolidBrush(color), Rectangle);
+			// Връщаме оригиналната трансформация, за да не влияе на другите фигури
+			grfx.Transform = oldTransform;	
         }
 
         public override void ChangeSize(float scale)
@@ -42,6 +51,26 @@ namespace Draw.src.Model
                 newSize, newSize        // Нова широчина и височина
             );
         }
-    }
+
+		public override bool Contains(PointF point)
+		{
+			float radius = 4; // визуален радиус на точката, например 4 пиксела
+
+			// Създаваме матрица на трансформация: ротация + позиция
+			Matrix transform = this.Rotation.Clone(); // Rotation идва от базовия клас
+			transform.Translate(this.Location.X, this.Location.Y, MatrixOrder.Append);
+
+			// Инвертираме трансформацията, за да върнем точката в локални координати
+			transform.Invert();
+
+			PointF[] pts = new PointF[] { point };
+			transform.TransformPoints(pts); // трансформираме кликнатата точка
+
+			// Проверяваме дали тя попада в кръгче около (0,0) с даден радиус
+			float dx = pts[0].X;
+			float dy = pts[0].Y;
+			return dx * dx + dy * dy <= radius * radius;
+		}
+	}
 }
 
