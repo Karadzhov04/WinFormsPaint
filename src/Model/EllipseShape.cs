@@ -5,23 +5,29 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Draw.src.Model
 {
-    internal class EllipseShape : Shape
+    [Serializable]
+    public class EllipseShape : Shape
     {
         #region Constructor
-
+        public EllipseShape() { }
         public EllipseShape(RectangleF rect) : base(rect)
         {
         }
 
-		#endregion
+        public EllipseShape(EllipseShape rect) : base(rect)
+        {
+        }
 
-		public override bool Contains(PointF point)
+        #endregion
+
+        public override bool Contains(PointF point)
 		{
 			PointF local = ToLocal(point);
 
@@ -33,18 +39,22 @@ namespace Draw.src.Model
 
 			return (dx * dx) / (a * a) + (dy * dy) / (b * b) <= 1;
 		}
-
-
-		public override void DrawSelf(Graphics grfx)
+        public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
-            ChangeSize(Scale);
 
+            Matrix oldTransform = grfx.Transform;
+
+            grfx.TranslateTransform(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
+            grfx.RotateTransform(RotateDegree);
+            //grfx.ScaleTransform(Scale, Scale);
+            ChangeSize(Scale);
+            grfx.TranslateTransform(-Rectangle.Width / 2, -Rectangle.Height / 2);
+
+            RectangleF ellipse = new RectangleF(0, 0, Rectangle.Width, Rectangle.Height);
             Pen pen = new Pen(StrokeColor, Stroke);
             Color color = Color.FromArgb(255 - Transparency, FillColor);
-            RectangleF ellipse = new RectangleF(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
 
-            //Rectangle rect = new Rectangle(50, 50, 100, 100);
             Brush brush;
             if (Color1Gradient != Color.Empty && Color2Gradient != Color.Empty)
             {
@@ -55,22 +65,21 @@ namespace Draw.src.Model
                 brush = new SolidBrush(color);
             }
 
-            Matrix oldTransform = grfx.Transform;
-
-            // Прилагаме ротация само на тази фигура
-            grfx.Transform = Rotation;
-
             grfx.FillEllipse(brush, ellipse);
             grfx.DrawEllipse(pen, ellipse);
 
-            // Връщаме оригиналната трансформация, за да не влияе на другите фигури
             grfx.Transform = oldTransform;
-
         }
+
         public override void ChangeSize(float scale)
         {
             Width = OriginalWidth + scale;
             Height = OriginalHeight + scale;
+        }
+
+        public override Shape Clone()
+        {
+            return new EllipseShape(this);
         }
     }
 }

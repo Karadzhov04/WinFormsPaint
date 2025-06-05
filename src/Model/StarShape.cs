@@ -9,14 +9,18 @@ using System.Windows.Forms;
 
 namespace Draw.src.Model
 {
+    [Serializable]
     public class StarShape : Shape
     {
         #region Constructor
-
+        public StarShape() { }
         public StarShape(RectangleF rect) : base(rect)
         {
         }
 
+        public StarShape(StarShape rect) : base(rect)
+        {
+        }
         #endregion
 
         public override bool Contains(PointF point)
@@ -48,19 +52,24 @@ namespace Draw.src.Model
         {
             base.DrawSelf(grfx);
 
+            Matrix oldTransform = grfx.Transform;
+
+            grfx.TranslateTransform(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
+            grfx.RotateTransform(RotateDegree);
             ChangeSize(Scale);
+            //grfx.ScaleTransform(Scale, Scale);
+            grfx.TranslateTransform(-Rectangle.Width / 2, -Rectangle.Height / 2);
 
-            PointF[] starPoints = GetStarPoints(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-
+            PointF[] starPoints = GetStarPoints(0, 0, Rectangle.Width, Rectangle.Height);
             Pen pen = new Pen(StrokeColor, Stroke);
             Color color = Color.FromArgb(255 - Transparency, FillColor);
-            Brush brush;
 
+            Brush brush;
             if (Color1Gradient != Color.Empty && Color2Gradient != Color.Empty)
             {
                 PathGradientBrush gradientBrush = new PathGradientBrush(starPoints);
-                gradientBrush.CenterColor = Color1Gradient; // Централен цвят
-                gradientBrush.SurroundColors = new Color[] { Color2Gradient }; // Външен цвят
+                gradientBrush.CenterColor = Color1Gradient;
+                gradientBrush.SurroundColors = new Color[] { Color2Gradient };
                 brush = gradientBrush;
             }
             else
@@ -68,22 +77,18 @@ namespace Draw.src.Model
                 brush = new SolidBrush(color);
             }
 
-            Matrix oldTransform = grfx.Transform;
-            // Прилагаме ротация само на тази фигура
-            grfx.Transform = Rotation;
-
             grfx.FillPolygon(brush, starPoints);
             grfx.DrawPolygon(pen, starPoints);
 
-            PointF center = new PointF(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
+            PointF center = new PointF(Rectangle.Width / 2, Rectangle.Height / 2);
             for (int i = 0; i < starPoints.Length; i++)
             {
                 grfx.DrawLine(pen, center, starPoints[i]);
             }
 
-            // Връщаме оригиналната трансформация, за да не влияе на другите фигури
             grfx.Transform = oldTransform;
         }
+
         private PointF[] GetStarPoints(float x, float y, float width, float height)
         {
             List<PointF> points = new List<PointF>();
@@ -117,6 +122,11 @@ namespace Draw.src.Model
         {
             Width = OriginalWidth + scale;
             Height = OriginalHeight + scale;
+        }
+
+        public override Shape Clone()
+        {
+            return new StarShape(this);
         }
     }
 }

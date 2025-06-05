@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace Draw.src.Model
 {
-    internal class LineShape : Shape
+    [Serializable]
+    public class LineShape : Shape
     {
         #region Constructor
-
+        public LineShape() { }
         public LineShape(RectangleF rect) : base(rect) { }
+        public LineShape(LineShape rect) : base(rect) { }
 
 		#endregion
 
@@ -56,28 +58,32 @@ namespace Draw.src.Model
 
 			return (float)Math.Sqrt(dx * dx + dy * dy);
 		}
-		public override void DrawSelf(Graphics grfx)
+        public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
 
-            ChangeSize(Scale);
-
             Matrix oldTransform = grfx.Transform;
-            // Прилагаме ротация само на тази фигура
-            grfx.Transform = Rotation;
+
+            grfx.TranslateTransform(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
+            grfx.RotateTransform(RotateDegree);
+            ChangeSize(Scale);
+            //grfx.ScaleTransform(Scale, Scale);
+            grfx.TranslateTransform(-Rectangle.Width / 2, -Rectangle.Height / 2);
 
             Pen pen = new Pen(StrokeColor, Stroke);
-            grfx.DrawLine(pen, Rectangle.Location,
-                new PointF(Rectangle.Right, Rectangle.Top));
 
-            // Връщаме оригиналната трансформация, за да не влияе на другите фигури
+            PointF p1 = new PointF(0, 0);
+            PointF p2 = new PointF(Rectangle.Width, Rectangle.Height);
+
+            grfx.DrawLine(pen, p1, p2);
+
             grfx.Transform = oldTransform;
         }
 
-        public override void ChangeSize(float scale)
+
+        public override Shape Clone()
         {
-            Width = OriginalWidth + scale;
-            Height = OriginalHeight + scale;
+            return new LineShape(this);
         }
     }
 }

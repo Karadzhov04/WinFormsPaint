@@ -51,9 +51,14 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -68,6 +73,12 @@
     <Compile Include="src\GUI\DoubleBufferedPanel.Designer.cs">
       <DependentUpon>DoubleBufferedPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\GUI\ImageViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\GUI\ImageViewForm.Designer.cs">
+      <DependentUpon>ImageViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\GUI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,12 +86,16 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="src\GUI\Program.cs" />
+    <Compile Include="src\Model\Actions\IAction.cs" />
+    <Compile Include="src\Model\Actions\ColorChangeAction.cs" />
     <Compile Include="src\Model\EllipseShape.cs" />
     <Compile Include="src\Model\GroupShape.cs" />
     <Compile Include="src\Model\Helpers\GeometryUtils.cs" />
     <Compile Include="src\Model\LineShape.cs" />
+    <Compile Include="src\Model\Actions\MoveAction.cs" />
     <Compile Include="src\Model\PointShape.cs" />
     <Compile Include="src\Model\RectangleShape.cs" />
+    <Compile Include="src\Model\Actions\RotateAction.cs" />
     <Compile Include="src\Model\Shape.cs" />
     <Compile Include="src\Model\StarShape.cs" />
     <Compile Include="src\Processors\DialogProcessor.cs" />
@@ -130,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\.editorconfig" />
   </ItemGroup>
   <ItemGroup>

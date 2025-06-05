@@ -4,10 +4,11 @@ using System.Drawing.Drawing2D;
 
 namespace Draw
 {
-	/// <summary>
-	/// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
-	/// </summary>
-	public abstract class Shape
+    /// <summary>
+    /// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
+    /// </summary>
+    [Serializable]
+    public abstract class Shape
 	{
 		#region Constructors
 		
@@ -24,12 +25,19 @@ namespace Draw
 		
 		public Shape(Shape shape)
 		{
-			this.Height = shape.Height;
-			this.Width = shape.Width;
-			this.Location = shape.Location;
-			this.rectangle = shape.rectangle;
-			
-			this.FillColor =  shape.FillColor;
+            this.Rectangle = shape.Rectangle;
+            this.FillColor = shape.FillColor;
+            this.Stroke = shape.Stroke;
+            this.StrokeColor = shape.StrokeColor;
+            this.Transparency = shape.Transparency;
+            this.Color1Gradient = shape.Color1Gradient;
+            this.Color2Gradient = shape.Color2Gradient;
+            this.Rotation = shape.Rotation.Clone(); // ВАЖНО: Matrix е референтен тип
+            this.RotateDegree = shape.RotateDegree;
+            this.OriginalWidth = shape.OriginalWidth;
+            this.OriginalHeight = shape.OriginalHeight;
+            this.Scale = shape.Scale;
+            this.Name = shape.Name;
         }
 		#endregion
 		
@@ -91,7 +99,7 @@ namespace Draw
             set { strokeColor = value; }
         }
 
-        private int transparency;
+        private int transparency = 0;
         public virtual int Transparency
         {
             get { return transparency; }
@@ -112,23 +120,38 @@ namespace Draw
             set { color2Gradient = value; }
         }
 
-        private Matrix rotation = new Matrix();
-        public virtual Matrix Rotation
+        [NonSerialized]
+        private Matrix rotation;
+
+        public Matrix Rotation
         {
-            get { return rotation; }
+            get { return (rotation ?? new Matrix()).Clone(); }
             set { rotation = value; }
         }
 
-        private float rotateDegree;
+        private float rotateDegree = 0f;
         public virtual float RotateDegree
         {
             get { return rotateDegree; }
-            set { rotateDegree = value; }
+            set
+            {
+                rotateDegree = value;
+
+                // Изчисляваме центъра на фигурата
+                PointF center = new PointF(
+                    Location.X + Width / 2,
+                    Location.Y + Height / 2
+                );
+
+                // Обновяваме ротационната матрица
+                rotation = new Matrix();
+                rotation.RotateAt(rotateDegree, center);
+            }
         }
         public float OriginalWidth { get; set; }
         public float OriginalHeight { get; set; }
 
-        private float scale = 0;
+        private float scale = 1f;
         public virtual float Scale
         {
             get { return scale; }
@@ -141,21 +164,46 @@ namespace Draw
 			get { return name; }
 			set { name = value; }
 		}
-		#endregion
+        #endregion
 
 
-		/// <summary>
-		/// Проверка дали точка point принадлежи на елемента.
-		/// </summary>
-		/// <param name="point">Точка</param>
-		/// <returns>Връща true, ако точката принадлежи на елемента и
-		/// false, ако не пренадлежи</returns>
-		public virtual bool Contains(PointF point)
-		{
-			return Rectangle.Contains(point.X, point.Y);
-		}
+        /// <summary>
+        /// Проверка дали точка point принадлежи на елемента.
+        /// </summary>
+        /// <param name="point">Точка</param>
+        /// <returns>Връща true, ако точката принадлежи на елемента и
+        /// false, ако не пренадлежи</returns>
 
-		public PointF ToLocal(PointF point)
+        public virtual bool Contains(PointF point)
+        {
+            if (RotateDegree != 0)
+            {
+                // Център на ротация – обикновено центърът на фигурата
+                PointF center = new PointF(Rectangle.X + Rectangle.Width / 2f, Rectangle.Y + Rectangle.Height / 2f);
+
+                // Обратна ротация на точката спрямо центъра
+                PointF transformedPoint = RotatePoint(point, center, -RotateDegree);
+
+                // Проверка спрямо оригиналния правоъгълник
+                return Rectangle.Contains(transformedPoint.X, transformedPoint.Y);
+            }
+
+            return Rectangle.Contains(point.X, point.Y);
+        }
+
+        private PointF RotatePoint(PointF point, PointF pivot, float angle)
+        {
+            double radians = angle * Math.PI / 180.0;
+            float dx = point.X - pivot.X;
+            float dy = point.Y - pivot.Y;
+
+            float rotatedX = (float)(dx * Math.Cos(radians) - dy * Math.Sin(radians)) + pivot.X;
+            float rotatedY = (float)(dx * Math.Sin(radians) + dy * Math.Cos(radians)) + pivot.Y;
+
+            return new PointF(rotatedX, rotatedY);
+        }
+
+        public PointF ToLocal(PointF point)
 		{
 			Matrix transform = this.Rotation.Clone();
 			transform.Translate(this.Location.X, this.Location.Y, MatrixOrder.Append);
@@ -180,5 +228,12 @@ namespace Draw
         {
             
         }
+		public abstract Shape Clone();
+
+        public virtual void Move(PointF delta)
+        {
+            Location = new PointF(Location.X + delta.X, Location.Y + delta.Y);
+        }
+
     }
 }

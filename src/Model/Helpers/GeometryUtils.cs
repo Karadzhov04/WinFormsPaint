@@ -24,16 +24,32 @@ namespace Draw.src.Model.Helpers
 				center.Y + (dx * sin + dy * cos)
 			);
 		}
+        public static PointF ToLocal(PointF point, Shape shape)
+        {
+            Matrix transform = new Matrix();
 
-		public static PointF ToLocal(PointF point, Shape shape)
-		{
-			Matrix transform = shape.Rotation.Clone();
-			transform.Translate(shape.Location.X, shape.Location.Y, MatrixOrder.Append); // Първо завърти, после премести
-			transform.Invert(); // Инвертираме за връщане към локални координати
+            // 1. Приложи транслацията (местене)
+            transform.Translate(shape.Location.X, shape.Location.Y, MatrixOrder.Append);
 
-			PointF[] points = new PointF[] { point };
-			transform.TransformPoints(points);
-			return points[0];
-		}
-	}
+            // 2. Приложи въртенето
+            PointF center = new PointF(
+                shape.Location.X + shape.Width / 2,
+                shape.Location.Y + shape.Height / 2
+            );
+            Matrix rotation = new Matrix();
+            rotation.RotateAt(shape.RotateDegree, center);
+
+            transform.Multiply(rotation, MatrixOrder.Append);
+
+            // 3. Инвертираме, за да отидем от глобално към локално
+            transform.Invert();
+
+            PointF[] points = new PointF[] { point };
+            transform.TransformPoints(points);
+            return points[0];
+        }
+
+
+
+    }
 }

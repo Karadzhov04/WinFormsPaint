@@ -3,37 +3,38 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Draw.src.Model
 {
-    internal class PointShape : Shape
+    [Serializable]
+    public class PointShape : Shape
     {
         #region Constructor
-
+        public PointShape() { }
         public PointShape(RectangleF rect) : base(rect) { }
+        public PointShape(PointShape rect) : base(rect) { }
 
 
         #endregion
-
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
 
+            Matrix oldTransform = grfx.Transform;
+
+            grfx.TranslateTransform(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
+            grfx.RotateTransform(RotateDegree);
             ChangeSize(Scale);
-            //Pen pen = new Pen(StrokeColor, Stroke);
+            //grfx.ScaleTransform(Scale, Scale);
+            grfx.TranslateTransform(-2.5f, -2.5f); // малко кръгче 5x5
+
             Color color = Color.FromArgb(255 - Transparency, FillColor);
+            grfx.FillEllipse(new SolidBrush(color), 0, 0, 5, 5);
 
-
-			Matrix oldTransform = grfx.Transform;
-
-			// Прилагаме ротация само на тази фигура
-			grfx.Transform = Rotation;
-
-			grfx.FillEllipse(new SolidBrush(color), Rectangle);
-			// Връщаме оригиналната трансформация, за да не влияе на другите фигури
-			grfx.Transform = oldTransform;	
+            grfx.Transform = oldTransform;
         }
 
         public override void ChangeSize(float scale)
@@ -71,6 +72,11 @@ namespace Draw.src.Model
 			float dy = pts[0].Y;
 			return dx * dx + dy * dy <= radius * radius;
 		}
-	}
+
+        public override Shape Clone()
+        {
+            return new PointShape(this);
+        }
+    }
 }
 

@@ -1,18 +1,20 @@
 ﻿using Draw.src.Model.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace Draw
 {
-	/// <summary>
-	/// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
-	/// </summary>
-	public class RectangleShape : Shape
+    /// <summary>
+    /// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
+    /// </summary>
+    [Serializable]
+    public class RectangleShape : Shape
 	{
-		#region Constructor
-		
-		public RectangleShape(RectangleF rect) : base(rect)
+        #region Constructor
+        public RectangleShape() { }
+        public RectangleShape(RectangleF rect) : base(rect)
 		{
 		}
 		
@@ -32,49 +34,56 @@ namespace Draw
 		public override bool Contains(PointF point)
 		{
 			PointF local = GeometryUtils.ToLocal(point, this);
+			Console.WriteLine($"Глобална: {point}, Локална: {local}, RotationAngle: {RotateDegree}");
+			Console.WriteLine($"BoundingBox: (0,0,{Width},{Height})");
+
 			return new RectangleF(0, 0, Width, Height).Contains(local);
 		}
-	/// <summary>
-	/// Частта, визуализираща конкретния примитив.
-	/// </summary>
-	public override void DrawSelf(Graphics grfx)
-		{
+        /// <summary>
+        /// Частта, визуализираща конкретния примитив.
+        /// </summary>
+        public override void DrawSelf(Graphics grfx)
+        {
             base.DrawSelf(grfx);
 
-			ChangeSize(Scale);
-            RectangleF rect = new RectangleF(Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-            Color color = Color.FromArgb(255- Transparency, FillColor);
+            Matrix oldTransform = grfx.Transform;
 
-			Pen pen = new Pen(StrokeColor, Stroke);
+            grfx.TranslateTransform(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2);
+            grfx.RotateTransform(RotateDegree);
+            ChangeSize(Scale);
+            //grfx.ScaleTransform(Scale, Scale);
+            grfx.TranslateTransform(-Rectangle.Width / 2, -Rectangle.Height / 2);
+
+            RectangleF localRect = new RectangleF(0, 0, Rectangle.Width, Rectangle.Height);
+            Pen pen = new Pen(StrokeColor, Stroke);
+            Color color = Color.FromArgb(255 - Transparency, FillColor);
 
             Brush brush;
             if (Color1Gradient != Color.Empty && Color2Gradient != Color.Empty)
             {
-                brush = new LinearGradientBrush(rect, Color1Gradient, Color2Gradient, LinearGradientMode.Horizontal);
+                brush = new LinearGradientBrush(localRect, Color1Gradient, Color2Gradient, LinearGradientMode.Horizontal);
             }
             else
             {
                 brush = new SolidBrush(color);
             }
 
+            grfx.FillRectangle(brush, localRect);
+            grfx.DrawRectangle(pen, 0, 0, Rectangle.Width, Rectangle.Height);
 
-            Matrix oldTransform = grfx.Transform;
-
-            // Прилагаме ротация само на тази фигура
-            grfx.Transform = Rotation;
-
-            grfx.FillRectangle(brush, rect);
-            grfx.DrawRectangle(pen, Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-
-            // Връщаме оригиналната трансформация, за да не влияе на другите фигури
             grfx.Transform = oldTransform;
-			
-			
-		}
+        }
+
         public override void ChangeSize(float scale)
         {
             Width = OriginalWidth + scale;
             Height = OriginalHeight + scale;
         }
+
+        public override Shape Clone()
+        {
+            return new RectangleShape(this);
+        }
     }
 }
+
