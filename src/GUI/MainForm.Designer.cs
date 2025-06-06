@@ -114,6 +114,7 @@
             this.txtFillColor = new System.Windows.Forms.TextBox();
             this.comboBoxShapes = new System.Windows.Forms.ComboBox();
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.button10 = new System.Windows.Forms.Button();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -848,11 +849,22 @@
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(244, 71);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 23;
+            this.button10.Text = "NewShape";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.drawNewShapeButton_Clicked);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 695);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.comboBoxShapes);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button8);
@@ -981,5 +993,6 @@
         private System.Windows.Forms.ToolStripMenuItem starToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pointToolStripMenuItem;
+        private System.Windows.Forms.Button button10;
     }
 }

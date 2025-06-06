@@ -1112,5 +1112,38 @@ namespace Draw
             dialogProcessor.SaveViewPortAsImage(this.viewPort);
         }
 
+        private void drawNewShapeButton_Clicked(object sender, EventArgs e)
+        {
+            string newName;
+            bool isUnique = false;
+
+            while (!isUnique)
+            {
+                newName = Microsoft.VisualBasic.Interaction.InputBox("Въведете име:");
+
+                if (string.IsNullOrWhiteSpace(newName))
+                {
+                    // Прекъсваме ако потребителят не е въвел нищо (или е натиснал Cancel)
+                    return;
+                }
+
+                if (!dialogProcessor.AllNames.Contains(newName))
+                {
+                    isUnique = true;
+
+                    dialogProcessor.AllNames.Add(newName);
+                    dialogProcessor.AddRandomFigure(newName);
+
+                    statusBar.Items[0].Text = "Последно действие: Рисуване на нова фигура";
+                    UpdateShapeComboBox();
+                    dialogProcessor.OnModelChanged();
+                    viewPort.Invalidate();
+                }
+                else
+                {
+                    MessageBox.Show("Името е заето! Моля, опитайте с друго име.", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
     }
 }

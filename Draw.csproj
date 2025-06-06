@@ -93,6 +93,7 @@
     <Compile Include="src\Model\Helpers\GeometryUtils.cs" />
     <Compile Include="src\Model\LineShape.cs" />
     <Compile Include="src\Model\Actions\MoveAction.cs" />
+    <Compile Include="src\Model\NewFigureShape.cs" />
     <Compile Include="src\Model\PointShape.cs" />
     <Compile Include="src\Model\RectangleShape.cs" />
     <Compile Include="src\Model\Actions\RotateAction.cs" />

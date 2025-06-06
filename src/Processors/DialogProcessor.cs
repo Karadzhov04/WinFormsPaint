@@ -608,5 +608,19 @@ namespace Draw
             }
         }
 
+        public void AddRandomFigure(string name)
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            NewFigureShape circle = new NewFigureShape(new Rectangle(x, y, 200, 200));
+            circle.FillColor = Color.White;
+            circle.Name = name;
+
+            ShapeList.Add(circle);
+
+            ModelChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
