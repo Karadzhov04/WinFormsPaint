@@ -1123,7 +1123,6 @@ namespace Draw
 
                 if (string.IsNullOrWhiteSpace(newName))
                 {
-                    // Прекъсваме ако потребителят не е въвел нищо (или е натиснал Cancel)
                     return;
                 }
 
